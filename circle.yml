@@ -26,3 +26,5 @@ test:
     override:
         - ./gradlew assemble
         - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+        - ./gradlew test
+        - ./gradlew cAT
