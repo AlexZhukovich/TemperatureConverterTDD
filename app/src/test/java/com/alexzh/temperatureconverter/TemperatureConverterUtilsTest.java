@@ -1,6 +1,7 @@
 package com.alexzh.temperatureconverter;
 
 import com.alexzh.temperatureconverter.model.Temperature;
+import com.alexzh.temperatureconverter.utils.TemperatureConverterUtils;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,7 @@ public class TemperatureConverterUtilsTest {
         mFrom = Temperature.CELSIUS;
         mTo = Temperature.FAHRENHEIT;
 
-        assertEquals(FAHRENHEIT_TEMPERATURE, mConverter.convert(CELSIUS_TEMPERATURE, mFrom, mTo), 0.0001);
+        assertEquals(FAHRENHEIT_TEMPERATURE, TemperatureConverterUtils.convert(CELSIUS_TEMPERATURE, mFrom, mTo), 0.0001);
     }
 
     @Test
@@ -41,7 +42,7 @@ public class TemperatureConverterUtilsTest {
         mFrom = Temperature.FAHRENHEIT;
         mTo = Temperature.CELSIUS;
 
-        assertEquals(CELSIUS_TEMPERATURE, mConverter.convert(FAHRENHEIT_TEMPERATURE, mFrom, mTo), 0.0001);
+        assertEquals(CELSIUS_TEMPERATURE, TemperatureConverterUtils.convert(FAHRENHEIT_TEMPERATURE, mFrom, mTo), 0.0001);
     }
 
     @Test
@@ -49,7 +50,7 @@ public class TemperatureConverterUtilsTest {
         mFrom = Temperature.CELSIUS;
         mTo = Temperature.KELVIN;
 
-        assertEquals(KELVIN_TEMPERATURE, mConverter.convert(CELSIUS_TEMPERATURE, mFrom, mTo), 0.0001);
+        assertEquals(KELVIN_TEMPERATURE, TemperatureConverterUtils.convert(CELSIUS_TEMPERATURE, mFrom, mTo), 0.0001);
     }
 
     @Test
@@ -57,7 +58,7 @@ public class TemperatureConverterUtilsTest {
         mFrom = Temperature.KELVIN;
         mTo = Temperature.CELSIUS;
 
-        assertEquals(CELSIUS_TEMPERATURE, mConverter.convert(KELVIN_TEMPERATURE, mFrom, mTo), 0.0001);
+        assertEquals(CELSIUS_TEMPERATURE, TemperatureConverterUtils.convert(KELVIN_TEMPERATURE, mFrom, mTo), 0.0001);
     }
 
     @Test
@@ -65,7 +66,7 @@ public class TemperatureConverterUtilsTest {
         mFrom = Temperature.FAHRENHEIT;
         mTo = Temperature.KELVIN;
 
-        assertEquals(KELVIN_TEMPERATURE, mConverter.convert(FAHRENHEIT_TEMPERATURE, mFrom, mTo), 0.0001);
+        assertEquals(KELVIN_TEMPERATURE, TemperatureConverterUtils.convert(FAHRENHEIT_TEMPERATURE, mFrom, mTo), 0.0001);
     }
 
     @Test
@@ -73,13 +74,13 @@ public class TemperatureConverterUtilsTest {
         mFrom = Temperature.KELVIN;
         mTo = Temperature.FAHRENHEIT;
 
-        assertEquals(FAHRENHEIT_TEMPERATURE, mConverter.convert(KELVIN_TEMPERATURE, mFrom, mTo), 0.0001);
+        assertEquals(FAHRENHEIT_TEMPERATURE, TemperatureConverterUtils.convert(KELVIN_TEMPERATURE, mFrom, mTo), 0.0001);
     }
 
     @Test
     public void shouldConvertToTheSameTemperature() {
-        assertEquals(CELSIUS_TEMPERATURE, mConverter.convert(CELSIUS_TEMPERATURE, Temperature.CELSIUS, Temperature.CELSIUS), 0.0001);
-        assertEquals(FAHRENHEIT_TEMPERATURE, mConverter.convert(FAHRENHEIT_TEMPERATURE, Temperature.FAHRENHEIT, Temperature.FAHRENHEIT), 0.0001);
-        assertEquals(KELVIN_TEMPERATURE, mConverter.convert(KELVIN_TEMPERATURE, Temperature.KELVIN, Temperature.KELVIN), 0.0001);
+        assertEquals(CELSIUS_TEMPERATURE, TemperatureConverterUtils.convert(CELSIUS_TEMPERATURE, Temperature.CELSIUS, Temperature.CELSIUS), 0.0001);
+        assertEquals(FAHRENHEIT_TEMPERATURE, TemperatureConverterUtils.convert(FAHRENHEIT_TEMPERATURE, Temperature.FAHRENHEIT, Temperature.FAHRENHEIT), 0.0001);
+        assertEquals(KELVIN_TEMPERATURE, TemperatureConverterUtils.convert(KELVIN_TEMPERATURE, Temperature.KELVIN, Temperature.KELVIN), 0.0001);
     }
 }
