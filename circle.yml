@@ -30,6 +30,6 @@ test:
         - circle-android wait-for-boot
     override:
         - ./gradlew assemble
-        - cp -r app/build/outputs $CIRCLE_ARTIFACTS
         - ./gradlew test
         - ./gradlew cAT
+        - cp -r app/build/outputs $CIRCLE_ARTIFACTS
