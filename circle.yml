@@ -4,6 +4,7 @@
 
 general:
     artifacts:
+        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/
         - /home/ubuntu/TemperatureConverterTDD/app/build/outputs/apk/
 
 machine:
