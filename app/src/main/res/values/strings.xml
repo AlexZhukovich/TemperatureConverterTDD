@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TemperatureConverterTDD</string>
+    <string name="input_hint">Temperature</string>
+    <string name="default_output_result">0.0</string>
+
+    <string-array name="temperature_units">
+        <item>°C</item>
+        <item>°F</item>
+        <item>K</item>
+    </string-array>
 </resources>
