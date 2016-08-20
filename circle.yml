@@ -1,14 +1,6 @@
 #
 # Build configuration for Circle CI
 #
-
-general:
-    artifacts:
-        - /home/ubuntu/TemperatureConverterTDD/app/build/outputs/apk/
-        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/androidTests/
-        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/tests/
-        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/jacoco/jacocoTestReport/
-
 machine:
     environment:
         ANDROID_HOME: /usr/local/android-sdk-linux
@@ -31,6 +23,15 @@ test:
             background: true
             parallel: true
         - circle-android wait-for-boot
+        - adb shell input keyevent 82
+        - adb shell svc power stayon true
+        - adb shell settings put global window_animation_scale 0
+        - adb shell settings put global transition_animation_scale 0
+        - adb shell settings put global animator_duration_scale 0
     override:
         - ./gradlew clean createDebugCoverageReport jacocoTestReport
-        - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+    post:
+        - cp -r app/build/outputs/apk $CIRCLE_ARTIFACTS
+        - cp -r app/build/reports/androidTests/
+        - cp -r app/build/reports/tests/
+        - cp -r app/build/reports/jacoco/jacocoTestReport/

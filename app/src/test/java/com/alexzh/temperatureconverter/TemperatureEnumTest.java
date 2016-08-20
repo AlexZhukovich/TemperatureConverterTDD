@@ -5,6 +5,7 @@ import com.alexzh.temperatureconverter.model.Temperature;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,18 +29,21 @@ public class TemperatureEnumTest {
     public void shouldVerifyCelsiusObject() {
         assertNotNull(mCelsius);
         assertEquals(CELSIUS_STR, mCelsius.toString());
+        assertEquals(mCelsius, Temperature.valueOf(CELSIUS_STR.toUpperCase()));
     }
 
     @Test
     public void shouldVerifyFahrenheitObject() {
         assertNotNull(mFahrenheit);
         assertEquals(FAHRENHEIT_STR, mFahrenheit.toString());
+        assertEquals(mFahrenheit, Temperature.valueOf(FAHRENHEIT_STR.toUpperCase()));
     }
 
     @Test
     public void shouldVerifyKelvinObject() {
         assertNotNull(mKelvin);
         assertEquals(KELVIN_STR, mKelvin.toString());
+        assertEquals(mKelvin, Temperature.valueOf(KELVIN_STR.toUpperCase()));
     }
 
     @Test
@@ -52,6 +56,16 @@ public class TemperatureEnumTest {
 
         assertNotEquals(mKelvin, mCelsius);
         assertNotEquals(mKelvin, mFahrenheit);
+    }
+
+    @Test
+    public void shouldVerifyValuesMethod() {
+        final Temperature[] values = new Temperature[]{
+                Temperature.CELSIUS,
+                Temperature.FAHRENHEIT,
+                Temperature.KELVIN
+        };
+        assertArrayEquals(values, Temperature.values());
     }
 
 }
