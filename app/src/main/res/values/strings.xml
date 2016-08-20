@@ -3,6 +3,8 @@
     <string name="input_hint">Temperature</string>
     <string name="default_output_result">0.0</string>
 
+    <string name="output_text_format">%.1f</string>
+
     <string-array name="temperature_units">
         <item>°C</item>
         <item>°F</item>
