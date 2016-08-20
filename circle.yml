@@ -4,8 +4,10 @@
 
 general:
     artifacts:
-        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/
         - /home/ubuntu/TemperatureConverterTDD/app/build/outputs/apk/
+        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/androidTests/
+        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/tests/
+        - /home/ubuntu/TemperatureConverterTDD/app/build/reports/jacoco/jacocoTestReport/
 
 machine:
     environment:
@@ -30,7 +32,5 @@ test:
             parallel: true
         - circle-android wait-for-boot
     override:
-        - ./gradlew assemble
-        - ./gradlew test
-        - ./gradlew cAT
+        ./gradlew clean createDebugCoverageReport jacocoTestReport
         - cp -r app/build/outputs $CIRCLE_ARTIFACTS
