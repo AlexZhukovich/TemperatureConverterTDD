@@ -32,5 +32,5 @@ test:
             parallel: true
         - circle-android wait-for-boot
     override:
-        ./gradlew clean createDebugCoverageReport jacocoTestReport
+        - ./gradlew clean createDebugCoverageReport jacocoTestReport
         - cp -r app/build/outputs $CIRCLE_ARTIFACTS
