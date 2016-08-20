@@ -1,5 +1,7 @@
 package com.alexzh.temperatureconverter.presentation;
 
+import com.alexzh.temperatureconverter.TemperatureConverterPresenter;
+import com.alexzh.temperatureconverter.TemperatureConverterView;
 import com.alexzh.temperatureconverter.model.Temperature;
 
 import org.junit.Before;
