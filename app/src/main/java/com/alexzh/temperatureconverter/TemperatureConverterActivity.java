@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.alexzh.temperatureconverter.di.TemperatureConverterApp;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -24,6 +26,7 @@ public class TemperatureConverterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_temperature_converter);
 
         ButterKnife.bind(this);
+        ((TemperatureConverterApp)getApplication()).getComponent().inject(this);
 
         ArrayAdapter<String> temperatureUnitAdapter = new ArrayAdapter<>(
                 this, R.layout.item_unit_spinner, getResources().getStringArray(R.array.temperature_units));
