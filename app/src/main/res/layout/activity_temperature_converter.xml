@@ -31,7 +31,8 @@
                     android:textSize="36sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/input_hint" />
+                    android:hint="@string/input_hint"
+                    android:inputType="numberDecimal" />
 
                 <Spinner
                     android:id="@+id/inputTemperatureSpinner"
