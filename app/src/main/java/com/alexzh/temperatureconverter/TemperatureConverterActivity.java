@@ -53,9 +53,7 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
 
     @OnClick(R.id.convertButton)
     public void onConvertButtonClicked() {
-        if (mPresenter != null) {
-            mPresenter.convertTemperature();
-        }
+        mPresenter.convertTemperature();
     }
 
     @Override
