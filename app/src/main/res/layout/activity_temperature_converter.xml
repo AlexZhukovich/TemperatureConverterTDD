@@ -32,15 +32,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="@string/input_hint"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:layout_toLeftOf="@+id/inputTemperatureSpinner"
+                    android:layout_toStartOf="@+id/inputTemperatureSpinner"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
 
                 <Spinner
                     android:id="@+id/inputTemperatureSpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/inputView"
-                    android:layout_toRightOf="@+id/inputView"
-                    android:layout_toEndOf="@+id/inputView" />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"/>
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/anim_toolbar"
@@ -79,7 +84,7 @@
 
         <Spinner
             android:id="@+id/outputTemperatureSpinner"
-            android:layout_width="105dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
