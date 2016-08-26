@@ -3,6 +3,8 @@ package com.alexzh.temperatureconverter.model;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -42,15 +44,34 @@ public class InputDataTest {
 
         assertTrue(mInputData.equals(mInputData));
 
+        assertFalse(mInputData.equals(null));
+        assertFalse(mInputData.equals(new String()));
+
         assertTrue(mInputData.equals(newDefaultInputData));
 
+        assertFalse(customInputData.equals(mInputData));
+        assertFalse(customInputData.hashCode() == mInputData.hashCode());
+
+        customInputData = new InputData(INPUT_VALUE, KELVIN_UNIT, CELSIUS_UNIT);
+        assertFalse(customInputData.equals(mInputData));
+        assertFalse(customInputData.hashCode() == mInputData.hashCode());
+
+        customInputData = new InputData(INPUT_VALUE, CELSIUS_UNIT, CELSIUS_UNIT);
+        assertFalse(customInputData.equals(mInputData));
+        assertFalse(customInputData.hashCode() == mInputData.hashCode());
+
+        customInputData = new InputData(INPUT_VALUE, null, CELSIUS_UNIT);
+        assertFalse(customInputData.equals(mInputData));
+        assertFalse(customInputData.hashCode() == mInputData.hashCode());
+
+        customInputData = new InputData(INPUT_VALUE, KELVIN_UNIT, null);
         assertFalse(customInputData.equals(mInputData));
         assertFalse(customInputData.hashCode() == mInputData.hashCode());
     }
 
     @Test
     public void shouldVerifyToString() {
-        String toString = String.format("%s{value=%.1f, fromUnit=%s, toUnit=%s}",
+        String toString = String.format(Locale.getDefault(), "%s{value=%.1f, fromUnit=%s, toUnit=%s}",
                 InputData.class.getSimpleName(),
                 INPUT_VALUE,
                 CELSIUS_UNIT,
