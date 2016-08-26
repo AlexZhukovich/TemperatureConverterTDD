@@ -28,15 +28,15 @@ dependencies:
 test:
     pre:
 
-        - emulator -avd circleci-android23 -no-audio -no-window:
+        - emulator -avd circleci-android24 -no-audio -no-window:
             background: true
             parallel: true
         - circle-android wait-for-boot
+        - adb shell input keyevent 82
+        - adb shell svc power stayon true
         - adb shell settings put global window_animation_scale 0
         - adb shell settings put global transition_animation_scale 0
         - adb shell settings put global animator_duration_scale 0
-        - adb shell input keyevent 82
-        - adb shell svc power stayon true
     override:
         - ./gradlew createDebugCoverageReport jacocoTestReport
     post:
