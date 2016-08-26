@@ -1,6 +1,4 @@
-package com.alexzh.temperatureconverter;
-
-import com.alexzh.temperatureconverter.model.Temperature;
+package com.alexzh.temperatureconverter.model;
 
 import org.junit.Before;
 import org.junit.Test;
