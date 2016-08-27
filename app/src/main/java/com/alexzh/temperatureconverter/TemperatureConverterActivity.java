@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,6 +29,7 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
     @BindView(R.id.inputTemperatureSpinner) AppCompatSpinner mInputUnitSpinner;
     @BindView(R.id.outputView) TextView mIOutputView;
     @BindView(R.id.outputTemperatureSpinner) Spinner mOutputUnitSpinner;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
 
     @Inject TemperatureConverterPresenter mPresenter;
 
@@ -43,6 +46,15 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
         temperatureUnitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mInputUnitSpinner.setAdapter(temperatureUnitAdapter);
         mOutputUnitSpinner.setAdapter(temperatureUnitAdapter);
+
+        mToolbar.setTitle("");
+        setSupportActionBar(mToolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.conrever_activity_menu, menu);
+        return true;
     }
 
     @Override
