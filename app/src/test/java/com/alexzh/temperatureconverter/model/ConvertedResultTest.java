@@ -78,6 +78,11 @@ public class ConvertedResultTest {
         customResult = new ConvertedResult(INPUT_VALUE, null, mInputData);
         assertFalse(customResult.equals(mResult));
         assertFalse(customResult.hashCode() == mInputData.hashCode());
+
+        mResult = new ConvertedResult(RESULT_VALUE, CELSIUS_UNIT, null);
+        customResult = new ConvertedResult(RESULT_VALUE, CELSIUS_UNIT, null);
+        assertTrue(customResult.equals(mResult));
+        assertTrue(customResult.hashCode() == mResult.hashCode());
     }
 
     @Test
