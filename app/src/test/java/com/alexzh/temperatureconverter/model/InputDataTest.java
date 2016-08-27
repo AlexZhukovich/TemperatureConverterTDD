@@ -38,7 +38,7 @@ public class InputDataTest {
     }
 
     @Test
-    public void shouldEqualObjects() {
+    public void shouldVerifyEquals() {
         InputData newDefaultInputData = new InputData(INPUT_VALUE, CELSIUS_UNIT, KELVIN_UNIT);
         InputData customInputData = new InputData(CUSTOM_INPUT_VALUE, KELVIN_UNIT, CELSIUS_UNIT);
 
