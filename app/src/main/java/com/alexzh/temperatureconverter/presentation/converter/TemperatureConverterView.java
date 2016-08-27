@@ -1,6 +1,7 @@
-package com.alexzh.temperatureconverter;
+package com.alexzh.temperatureconverter.presentation.converter;
 
 import com.alexzh.temperatureconverter.model.Temperature;
+import com.alexzh.temperatureconverter.presentation.base.MvpView;
 
 public interface TemperatureConverterView extends MvpView {
 

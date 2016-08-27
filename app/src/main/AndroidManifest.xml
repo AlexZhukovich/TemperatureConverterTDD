@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".di.TemperatureConverterApp">
-        <activity android:name=".TemperatureConverterActivity">
+        <activity android:name=".presentation.converter.TemperatureConverterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

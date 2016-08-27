@@ -2,7 +2,7 @@ package com.alexzh.temperatureconverter.di;
 
 import android.app.Application;
 
-import com.alexzh.temperatureconverter.TemperatureConverterPresenter;
+import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterPresenter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -14,10 +14,5 @@ public class ApplicationModule {
 
     public ApplicationModule(Application application) {
         this.mApplication = application;
-    }
-
-    @Provides
-    public TemperatureConverterPresenter provideTemperatureConverterPresenter() {
-        return new TemperatureConverterPresenter();
     }
 }

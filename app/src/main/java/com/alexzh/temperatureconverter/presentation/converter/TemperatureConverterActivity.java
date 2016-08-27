@@ -1,4 +1,4 @@
-package com.alexzh.temperatureconverter;
+package com.alexzh.temperatureconverter.presentation.converter;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.alexzh.temperatureconverter.R;
 import com.alexzh.temperatureconverter.di.TemperatureConverterApp;
 import com.alexzh.temperatureconverter.model.Temperature;
 
@@ -39,7 +40,7 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
         setContentView(R.layout.activity_temperature_converter);
 
         ButterKnife.bind(this);
-        ((TemperatureConverterApp)getApplication()).getComponent().inject(this);
+        ((TemperatureConverterApp)getApplication()).createTemperatureConverterComponent().inject(this);
 
         ArrayAdapter<String> temperatureUnitAdapter = new ArrayAdapter<>(
                 this, R.layout.item_unit_spinner, getResources().getStringArray(R.array.temperature_units));
@@ -104,5 +105,11 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
     protected void onStop() {
         mPresenter.detachView();
         super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        ((TemperatureConverterApp)getApplication()).releaseTemperatureConverterComponent();
+        super.onDestroy();
     }
 }

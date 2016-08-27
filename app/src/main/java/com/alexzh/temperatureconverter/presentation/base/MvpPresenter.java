@@ -1,4 +1,4 @@
-package com.alexzh.temperatureconverter;
+package com.alexzh.temperatureconverter.presentation.base;
 
 public interface MvpPresenter<V extends MvpView> {
 

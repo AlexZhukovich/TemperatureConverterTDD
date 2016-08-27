@@ -5,6 +5,8 @@ import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
