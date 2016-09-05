@@ -8,6 +8,8 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.preference.PreferenceManager;
 
+import com.alexzh.temperatureconverter.presentation.settings.SettingsActivity;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
