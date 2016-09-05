@@ -165,4 +165,18 @@ public class TemperatureConverterActivityTest {
         onView(withId(R.id.outputView))
                 .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, CELSIUS_VALUE))));
     }
+
+    @Test
+    public void shouldVerifyOpenSettingsIntent() {
+        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+
+        onView(withText(R.string.action_settings))
+                .check(matches(isDisplayed()));
+
+        onView(withText(R.string.action_settings))
+                .perform(click());
+
+        onView(withText(R.string.converter_options_category))
+                .check(matches(isDisplayed()));
+    }
 }

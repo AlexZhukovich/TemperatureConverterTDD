@@ -60,4 +60,30 @@ public class TemperatureConverterPresenterTest {
         verify(mView, never()).getToTemperatureUnit();
         verify(mView, never()).setOutputValue(anyDouble());
     }
+
+    @Test
+    public void shouldVerifyOpenSettingsWithCorrectView() {
+        mPresenter.attachView(mView);
+        mPresenter.openSettings();
+        mPresenter.detachView();
+
+        verify(mView, never()).getInputValue();
+        verify(mView, never()).getFromTemperatureUnit();
+        verify(mView, never()).getToTemperatureUnit();
+        verify(mView, never()).setOutputValue(anyDouble());
+        verify(mView, times(1)).launchSettingsActivity();
+    }
+
+    @Test
+    public void shouldVerifyOpenSettingsWithNullView() {
+        mPresenter.attachView(null);
+        mPresenter.openSettings();
+        mPresenter.detachView();
+
+        verify(mView, never()).getInputValue();
+        verify(mView, never()).getFromTemperatureUnit();
+        verify(mView, never()).getToTemperatureUnit();
+        verify(mView, never()).setOutputValue(anyDouble());
+        verify(mView, never()).launchSettingsActivity();
+    }
 }

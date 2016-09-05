@@ -23,6 +23,12 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
         }
     }
 
+    public void openSettings() {
+        if (mView != null) {
+            mView.launchSettingsActivity();
+        }
+    }
+
     @Override
     public void detachView() {
         this.mView = null;
