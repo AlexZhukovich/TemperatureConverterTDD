@@ -6,6 +6,13 @@
 
     <string name="output_text_format">%.1f</string>
 
+    <string name="converter_options_category">Converter options</string>
+    <string name="convert_temperature_online_title">Convert temperature online</string>
+    <string name="convert_online_description">The temperature converts online</string>
+    <string name="convert_locally_description">The temperature converts locally</string>
+
+    <string name="convert_online_key" translatable="false">convert_online</string>
+
     <string-array name="temperature_units">
         <item>°C</item>
         <item>°F</item>
