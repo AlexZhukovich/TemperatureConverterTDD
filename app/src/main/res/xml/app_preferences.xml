@@ -1,0 +1,15 @@
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="@string/converter_options_category">
+
+        <android.support.v7.preference.SwitchPreferenceCompat
+            android:key="@string/convert_online_key"
+            android:title="@string/convert_temperature_online_title"
+            android:defaultValue="false"
+            android:summaryOff="@string/convert_locally_description"
+            android:summaryOn="@string/convert_online_description"/>
+    </android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>
