@@ -12,6 +12,22 @@ public class TemperatureConvertedError {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TemperatureConvertedError that = (TemperatureConvertedError) o;
+
+        return mMessage != null ? mMessage.equals(that.mMessage) : that.mMessage == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return mMessage != null ? mMessage.hashCode() : 0;
+    }
+
+    @Override
     public String toString() {
         return "TemperatureConvertedError{" +
                 "mMessage='" + mMessage + '\'' +
