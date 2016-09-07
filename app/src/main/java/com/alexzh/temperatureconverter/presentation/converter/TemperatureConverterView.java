@@ -14,4 +14,6 @@ public interface TemperatureConverterView extends MvpView {
     void setOutputValue(double value);
 
     void launchSettingsActivity();
+
+    void displayErrorMessage(String message);
 }

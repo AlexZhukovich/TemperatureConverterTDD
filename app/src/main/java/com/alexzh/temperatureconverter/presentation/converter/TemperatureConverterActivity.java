@@ -2,6 +2,7 @@ package com.alexzh.temperatureconverter.presentation.converter;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatSpinner;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
     @BindView(R.id.outputView) TextView mIOutputView;
     @BindView(R.id.outputTemperatureSpinner) Spinner mOutputUnitSpinner;
     @BindView(R.id.toolbar) Toolbar mToolbar;
+    @BindView(R.id.resultLayout) RelativeLayout mResultLayout;
 
     @Inject TemperatureConverterPresenter mPresenter;
 
@@ -117,6 +120,11 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
     @Override
     public void launchSettingsActivity() {
         startActivity(new Intent(this, SettingsActivity.class));
+    }
+
+    @Override
+    public void displayErrorMessage(String message) {
+        Snackbar.make(mResultLayout, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
