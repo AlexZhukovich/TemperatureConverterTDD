@@ -4,11 +4,13 @@ import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterPresenter;
 import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterView;
 
+import org.greenrobot.eventbus.EventBus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -21,16 +23,17 @@ public class TemperatureConverterPresenterTest {
     private final static String INPUT_VALUE_STR = "12.5";
     private final static Temperature FROM_TEMPERATURE_UNIT = Temperature.CELSIUS;
     private final static Temperature TO_TEMPERATURE_UNIT = Temperature.FAHRENHEIT;
-    private final static double CORRECT_RESULT = 54.5d;
 
     private TemperatureConverterView mView;
     private TemperatureConverterPresenter mPresenter;
+    private EventBus mEventBus;
 
     @Before
     public void setup() {
         mView = mock(TemperatureConverterView.class);
+        mEventBus = mock(EventBus.class);
 
-        mPresenter = new TemperatureConverterPresenter();
+        mPresenter = new TemperatureConverterPresenter(mEventBus);
 
         when(mView.getInputValue()).thenReturn(INPUT_VALUE_STR);
         when(mView.getFromTemperatureUnit()).thenReturn(FROM_TEMPERATURE_UNIT);
@@ -38,7 +41,7 @@ public class TemperatureConverterPresenterTest {
     }
 
     @Test
-    public void shouldVerifyConvertDataWithCorrectView() {
+    public void shouldVerifyConvertDataSuccessfulWithCorrectView() {
         mPresenter.attachView(mView);
         mPresenter.convertTemperature();
         mPresenter.detachView();
@@ -46,7 +49,7 @@ public class TemperatureConverterPresenterTest {
         verify(mView, times(1)).getInputValue();
         verify(mView, times(1)).getFromTemperatureUnit();
         verify(mView, times(1)).getToTemperatureUnit();
-        verify(mView, times(1)).setOutputValue(CORRECT_RESULT);
+        verify(mEventBus, times(1)).post(any());
     }
 
     @Test
