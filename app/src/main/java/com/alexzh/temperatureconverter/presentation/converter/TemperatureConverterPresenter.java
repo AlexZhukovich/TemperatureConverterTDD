@@ -1,12 +1,11 @@
 package com.alexzh.temperatureconverter.presentation.converter;
 
-import com.alexzh.temperatureconverter.model.ConvertedResult;
+import com.alexzh.temperatureconverter.calculation.offline.OfflineConvertTemperature;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedSuccessful;
 import com.alexzh.temperatureconverter.presentation.base.MvpPresenter;
-import com.alexzh.temperatureconverter.utils.TemperatureConverterUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -27,22 +26,12 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
 
     public void convertTemperature() {
         if (mView != null) {
+            OfflineConvertTemperature converter = new OfflineConvertTemperature(mEventBus);
+
             double inputValue = Double.valueOf(mView.getInputValue());
             Temperature from = mView.getFromTemperatureUnit();
             Temperature to = mView.getToTemperatureUnit();
-
-            double result = TemperatureConverterUtils.convert(inputValue, from, to);
-            mEventBus.post(new TemperatureConvertedSuccessful(
-                    new ConvertedResult(
-                            result,
-                            to,
-                            new InputData(
-                                    inputValue,
-                                    from,
-                                    to
-                            )
-                    )
-            ));
+            converter.convertData(new InputData(inputValue, from, to));
         }
     }
 
