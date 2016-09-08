@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 
 import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterPresenter;
+import com.alexzh.temperatureconverter.service.SharedPreferenceManager;
 
 import javax.inject.Singleton;
 
@@ -29,5 +30,10 @@ public class ApplicationModule {
     @Provides @Singleton
     public SharedPreferences provideSharedPreferences(Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
+    }
+
+    @Provides @Singleton
+    public SharedPreferenceManager provideSharedPreferenceManager(SharedPreferences sharedPreferences) {
+        return new SharedPreferenceManager(sharedPreferences);
     }
 }
