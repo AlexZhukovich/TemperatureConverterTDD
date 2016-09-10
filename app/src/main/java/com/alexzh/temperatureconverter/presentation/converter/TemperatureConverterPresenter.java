@@ -1,6 +1,6 @@
 package com.alexzh.temperatureconverter.presentation.converter;
 
-import com.alexzh.temperatureconverter.calculation.offline.OfflineConvertTemperature;
+import com.alexzh.temperatureconverter.calculation.ConverterTemperatureFactory;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
@@ -10,11 +10,16 @@ import com.alexzh.temperatureconverter.presentation.base.MvpPresenter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import javax.inject.Inject;
+
 public class TemperatureConverterPresenter implements MvpPresenter<TemperatureConverterView> {
     private TemperatureConverterView mView;
     private EventBus mEventBus;
+    private ConverterTemperatureFactory mConverterTemperatureFactory;
 
-    public TemperatureConverterPresenter(EventBus eventBus) {
+    @Inject
+    public TemperatureConverterPresenter(ConverterTemperatureFactory converterTemperatureFactory, EventBus eventBus) {
+        this.mConverterTemperatureFactory = converterTemperatureFactory;
         this.mEventBus = eventBus;
     }
 
@@ -26,12 +31,14 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
 
     public void convertTemperature() {
         if (mView != null) {
-            OfflineConvertTemperature converter = new OfflineConvertTemperature(mEventBus);
-
-            double inputValue = Double.valueOf(mView.getInputValue());
-            Temperature from = mView.getFromTemperatureUnit();
-            Temperature to = mView.getToTemperatureUnit();
-            converter.convertData(new InputData(inputValue, from, to));
+            try {
+                double inputValue = Double.valueOf(mView.getInputValue());
+                Temperature from = mView.getFromTemperatureUnit();
+                Temperature to = mView.getToTemperatureUnit();
+                mConverterTemperatureFactory.getTemperatureConverter().convertData(new InputData(inputValue, from, to));
+            } catch (NumberFormatException ex) {
+                mEventBus.post(new TemperatureConvertedError("ERROR"));
+            }
         }
     }
 

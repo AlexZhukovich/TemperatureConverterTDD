@@ -1,5 +1,8 @@
 package com.alexzh.temperatureconverter.presentation;
 
+import com.alexzh.temperatureconverter.calculation.ConverterTemperatureFactory;
+import com.alexzh.temperatureconverter.calculation.offline.OfflineConvertTemperature;
+import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterPresenter;
 import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterView;
@@ -8,11 +11,13 @@ import org.greenrobot.eventbus.EventBus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -24,16 +29,25 @@ public class TemperatureConverterPresenterTest {
     private final static Temperature FROM_TEMPERATURE_UNIT = Temperature.CELSIUS;
     private final static Temperature TO_TEMPERATURE_UNIT = Temperature.FAHRENHEIT;
 
+    @Mock
     private TemperatureConverterView mView;
-    private TemperatureConverterPresenter mPresenter;
+
+    @Mock
     private EventBus mEventBus;
+
+    @Mock
+    private ConverterTemperatureFactory mTemperatureFactory;
+
+    @Mock
+    private OfflineConvertTemperature mConverter;
+
+    private TemperatureConverterPresenter mPresenter;
 
     @Before
     public void setup() {
-        mView = mock(TemperatureConverterView.class);
-        mEventBus = mock(EventBus.class);
+        MockitoAnnotations.initMocks(this);
 
-        mPresenter = new TemperatureConverterPresenter(mEventBus);
+        mPresenter = new TemperatureConverterPresenter(mTemperatureFactory, mEventBus);
 
         when(mView.getInputValue()).thenReturn(INPUT_VALUE_STR);
         when(mView.getFromTemperatureUnit()).thenReturn(FROM_TEMPERATURE_UNIT);
@@ -42,14 +56,18 @@ public class TemperatureConverterPresenterTest {
 
     @Test
     public void shouldVerifyConvertDataSuccessfulWithCorrectView() {
+        when(mTemperatureFactory.getTemperatureConverter()).thenReturn(mConverter);
+        doNothing().when(mConverter).convertData(any(InputData.class));
+
         mPresenter.attachView(mView);
         mPresenter.convertTemperature();
         mPresenter.detachView();
 
+        verify(mEventBus).register(any());
         verify(mView, times(1)).getInputValue();
         verify(mView, times(1)).getFromTemperatureUnit();
         verify(mView, times(1)).getToTemperatureUnit();
-        verify(mEventBus, times(1)).post(any());
+        verify(mEventBus).unregister(any());
     }
 
     @Test
