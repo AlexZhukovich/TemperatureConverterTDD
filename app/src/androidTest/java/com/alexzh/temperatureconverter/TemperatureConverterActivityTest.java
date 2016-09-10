@@ -87,6 +87,18 @@ public class TemperatureConverterActivityTest {
     }
 
     @Test
+    public void shouldVerifyDisplayingError() {
+        onView(withId(R.id.inputView))
+                .perform(typeText("."), ViewActions.closeSoftKeyboard());
+
+        onView(withId(R.id.convertButton))
+                .perform(click());
+
+        onView(withText("ERROR"))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
     public void shouldVerifyConvertingFromCelsiusToKelvin() {
         onView(withId(R.id.inputView))
                 .perform(typeText(String.valueOf(CELSIUS_VALUE)), ViewActions.closeSoftKeyboard());
