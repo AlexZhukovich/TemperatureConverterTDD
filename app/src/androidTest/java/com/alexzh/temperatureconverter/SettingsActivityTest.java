@@ -10,6 +10,7 @@ import android.support.v7.preference.PreferenceManager;
 
 import com.alexzh.temperatureconverter.presentation.settings.SettingsActivity;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,19 +25,18 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public class SettingsActivityTest {
 
+    private Context mContext;
+
     @Rule
     public ActivityTestRule<SettingsActivity> mRule =
             new ActivityTestRule<>(SettingsActivity.class, false, false);
 
     @Before
     public void setup() {
-        Context context = InstrumentationRegistry.getTargetContext();
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.clear();
-        editor.apply();
+        mContext = InstrumentationRegistry.getTargetContext();
 
-        mRule.launchActivity(new Intent(context, SettingsActivity.class));
+        cleanSharedPreference();
+        mRule.launchActivity(new Intent(mContext, SettingsActivity.class));
     }
 
     @Test
@@ -73,5 +73,17 @@ public class SettingsActivityTest {
 
         onView(withText(R.string.convert_locally_description))
                 .check(matches(isDisplayed()));
+    }
+
+    @After
+    public void tearDown() {
+        cleanSharedPreference();
+    }
+
+    private void cleanSharedPreference() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
     }
 }
