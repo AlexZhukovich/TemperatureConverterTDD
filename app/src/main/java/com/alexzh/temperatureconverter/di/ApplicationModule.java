@@ -5,8 +5,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 
-import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterPresenter;
 import com.alexzh.temperatureconverter.service.SharedPreferenceManager;
+
+import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Singleton;
 
@@ -25,6 +26,11 @@ public class ApplicationModule {
     @Provides @Singleton
     public Context provideContext() {
         return mApplication;
+    }
+
+    @Provides
+    public EventBus provideEventBus() {
+        return EventBus.getDefault();
     }
 
     @Provides @Singleton

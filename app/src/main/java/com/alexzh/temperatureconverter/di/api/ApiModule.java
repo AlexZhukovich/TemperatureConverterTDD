@@ -1,5 +1,7 @@
 package com.alexzh.temperatureconverter.di.api;
 
+import com.alexzh.temperatureconverter.calculation.online.TemperatureConverterApiService;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -12,11 +14,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiModule {
 
     @Provides @Singleton
-    public Retrofit provideRetrofir() {
+    public Retrofit provideRetrofit() {
         return new Retrofit.Builder()
                 .baseUrl("https://temperatureconverterapi.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+    }
+
+    @Provides @Singleton
+    public TemperatureConverterApiService provideTemperatureConverterApiService(Retrofit retrofit) {
+        return retrofit.create(TemperatureConverterApiService.class);
     }
 
 }
