@@ -4,9 +4,11 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.view.WindowManager;
 
 import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterActivity;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +40,19 @@ public class TemperatureConverterActivityTest {
     @Rule
     public ActivityTestRule<TemperatureConverterActivity> mRule =
             new ActivityTestRule<>(TemperatureConverterActivity.class);
+
+    @Before
+    public void setUp() {
+        final TemperatureConverterActivity activity = mRule.getActivity();
+        Runnable wakeUpDevice = new Runnable() {
+            public void run() {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        };
+        activity.runOnUiThread(wakeUpDevice);
+    }
 
     @Test
     public void shouldVerifyGeneralViews() {

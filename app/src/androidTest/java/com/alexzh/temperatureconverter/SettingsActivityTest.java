@@ -7,7 +7,9 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.preference.PreferenceManager;
+import android.view.WindowManager;
 
+import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterActivity;
 import com.alexzh.temperatureconverter.presentation.settings.SettingsActivity;
 
 import org.junit.After;
@@ -37,6 +39,16 @@ public class SettingsActivityTest {
 
         cleanSharedPreference();
         mRule.launchActivity(new Intent(mContext, SettingsActivity.class));
+
+        final SettingsActivity activity = mRule.getActivity();
+        Runnable wakeUpDevice = new Runnable() {
+            public void run() {
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        };
+        activity.runOnUiThread(wakeUpDevice);
     }
 
     @Test
