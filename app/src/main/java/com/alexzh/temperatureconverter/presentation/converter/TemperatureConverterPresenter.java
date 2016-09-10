@@ -31,6 +31,7 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
 
     public void convertTemperature() {
         if (mView != null) {
+            mView.displayProgress();
             try {
                 double inputValue = Double.valueOf(mView.getInputValue());
                 Temperature from = mView.getFromTemperatureUnit();
@@ -51,11 +52,14 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
     @Subscribe
     public void onEvent(TemperatureConvertedSuccessful event) {
         mView.setOutputValue(event.getResult().getResult());
+        mView.hideProgress();
     }
 
     @Subscribe
     public void onEvent(TemperatureConvertedError event) {
         mView.displayErrorMessage(event.getMessage());
+        mView.setOutputValue(0.0);
+        mView.hideProgress();
     }
 
     @Override

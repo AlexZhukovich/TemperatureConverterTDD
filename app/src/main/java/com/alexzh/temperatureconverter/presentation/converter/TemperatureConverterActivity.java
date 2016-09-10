@@ -9,7 +9,9 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,6 +28,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TemperatureConverterActivity extends AppCompatActivity implements TemperatureConverterView {
+    private final static String LAST_RESULT = "last_result";
     private final static int CELSIUS_POSITION = 0;
     private final static int FAHRENHEIT_POSITION = 1;
     private final static int KELVIN_POSITION = 2;
@@ -33,10 +36,11 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
 
     @BindView(R.id.inputView) AppCompatEditText mInputView;
     @BindView(R.id.inputTemperatureSpinner) AppCompatSpinner mInputUnitSpinner;
-    @BindView(R.id.outputView) TextView mIOutputView;
+    @BindView(R.id.outputView) TextView mOutputView;
     @BindView(R.id.outputTemperatureSpinner) Spinner mOutputUnitSpinner;
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.resultLayout) RelativeLayout mResultLayout;
+    @BindView(R.id.progressBar) ProgressBar mProgressBar;
 
     @Inject TemperatureConverterPresenter mPresenter;
 
@@ -56,6 +60,8 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
+
+        hideProgress();
     }
 
     @Override
@@ -108,13 +114,43 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(LAST_RESULT, mOutputView.getText().toString());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mOutputView.setText(savedInstanceState.getString(LAST_RESULT));
+    }
+
+    @Override
     public Temperature getToTemperatureUnit() {
         return getTemperatureUnitFromSpinner(mOutputUnitSpinner);
     }
 
     @Override
     public void setOutputValue(double value) {
-        mIOutputView.setText(getString(R.string.output_text_format, value));
+        mOutputView.setText(getString(R.string.output_text_format, value));
+    }
+
+    @Override
+    public void displayProgress() {
+        mProgressBar.setVisibility(View.VISIBLE);
+        mInputUnitSpinner.setEnabled(false);
+        mInputView.setEnabled(false);
+        mOutputUnitSpinner.setEnabled(false);
+        mOutputView.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        mProgressBar.setVisibility(View.GONE);
+        mInputUnitSpinner.setEnabled(true);
+        mInputView.setEnabled(true);
+        mOutputUnitSpinner.setEnabled(true);
+        mOutputView.setVisibility(View.VISIBLE);
     }
 
     @Override

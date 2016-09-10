@@ -64,7 +64,7 @@
     <RelativeLayout
         android:id="@+id/resultLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
@@ -90,6 +90,14 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar"
+            android:indeterminate="false"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

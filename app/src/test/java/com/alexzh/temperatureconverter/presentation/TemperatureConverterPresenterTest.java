@@ -64,6 +64,7 @@ public class TemperatureConverterPresenterTest {
         mPresenter.detachView();
 
         verify(mEventBus).register(any());
+        verify(mView).displayProgress();
         verify(mView, times(1)).getInputValue();
         verify(mView, times(1)).getFromTemperatureUnit();
         verify(mView, times(1)).getToTemperatureUnit();

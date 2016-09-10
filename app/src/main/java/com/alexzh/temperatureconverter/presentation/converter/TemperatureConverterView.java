@@ -13,6 +13,10 @@ public interface TemperatureConverterView extends MvpView {
 
     void setOutputValue(double value);
 
+    void displayProgress();
+
+    void hideProgress();
+
     void launchSettingsActivity();
 
     void displayErrorMessage(String message);
