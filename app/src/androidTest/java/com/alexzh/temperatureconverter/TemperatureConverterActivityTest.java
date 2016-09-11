@@ -35,7 +35,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.not;
 import static org.hamcrest.core.AllOf.allOf;
 
 @RunWith(AndroidJUnit4.class)
@@ -80,20 +79,16 @@ public class TemperatureConverterActivityTest {
         onView(withId(R.id.convertButton))
                 .perform(click());
 
-
-
         onView(withId(R.id.outputView))
                 .check(matches(isDisplayed()));
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, KELVIN_VALUE))));
-
-
+                .check(matches(withText(getOutputString(KELVIN_VALUE))));
 
         rotateScreen();
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, KELVIN_VALUE))));
+                .check(matches(withText(getOutputString(KELVIN_VALUE))));
     }
 
     @Test
@@ -134,7 +129,7 @@ public class TemperatureConverterActivityTest {
                 .check(matches(isDisplayed()));
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, FAHRENHEIT_VALUE))));
+                .check(matches(withText(getOutputString(FAHRENHEIT_VALUE))));
     }
 
     @Test
@@ -162,7 +157,7 @@ public class TemperatureConverterActivityTest {
                 .perform(click());
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, KELVIN_VALUE))));
+                .check(matches(withText(getOutputString(KELVIN_VALUE))));
     }
 
     @Test
@@ -181,7 +176,7 @@ public class TemperatureConverterActivityTest {
                 .check(matches(isDisplayed()));
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, CELSIUS_VALUE))));
+                .check(matches(withText(getOutputString(CELSIUS_VALUE))));
     }
 
     @Test
@@ -200,7 +195,7 @@ public class TemperatureConverterActivityTest {
                 .check(matches(isDisplayed()));
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, KELVIN_VALUE))));
+                .check(matches(withText(getOutputString(KELVIN_VALUE))));
     }
 
     @Test
@@ -219,7 +214,7 @@ public class TemperatureConverterActivityTest {
                 .check(matches(isDisplayed()));
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, FAHRENHEIT_VALUE))));
+                .check(matches(withText(getOutputString(FAHRENHEIT_VALUE))));
     }
 
     @Test
@@ -238,7 +233,7 @@ public class TemperatureConverterActivityTest {
                 .check(matches(isDisplayed()));
 
         onView(withId(R.id.outputView))
-                .check(matches(withText(mRule.getActivity().getString(R.string.output_text_format, CELSIUS_VALUE))));
+                .check(matches(withText(getOutputString(CELSIUS_VALUE))));
     }
 
     @Test
@@ -282,5 +277,9 @@ public class TemperatureConverterActivityTest {
                 (orientation == Configuration.ORIENTATION_PORTRAIT) ?
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE :
                         ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    private String getOutputString(double value) {
+        return mRule.getActivity().getString(R.string.output_text_format, value);
     }
 }

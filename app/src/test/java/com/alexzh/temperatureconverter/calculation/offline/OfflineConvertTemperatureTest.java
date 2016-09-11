@@ -9,11 +9,12 @@ import org.greenrobot.eventbus.EventBus;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -23,16 +24,19 @@ public class OfflineConvertTemperatureTest {
     private final static double FAHRENHEIT_TEMPERATURE = 96.8d;
     private final static double KELVIN_TEMPERATURE = 309.15d;
 
+    @Mock
+    private EventBus mEventBus;
+
     private OfflineConvertTemperature mConverter;
     private InputData mInputData;
     private TemperatureConvertedSuccessful mSuccessful;
     private TemperatureConvertedError mError;
-    private EventBus mEventBus;
 
 
     @Before
     public void setup() {
-        mEventBus = mock(EventBus.class);
+        MockitoAnnotations.initMocks(this);
+
         mConverter = new OfflineConvertTemperature(mEventBus);
         mError = mConverter.createTemperatureErrorValue();
     }
