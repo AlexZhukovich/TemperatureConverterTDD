@@ -10,7 +10,9 @@ import org.junit.Test;
 import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class TemperatureConvertedSuccessfulTest {
     private final static double INPUT_VALUE = 36.0d;
@@ -40,6 +42,29 @@ public class TemperatureConvertedSuccessfulTest {
 
         mSuccess = new TemperatureConvertedSuccessful(CONVERTED_RESULT_INVERSE);
         assertEquals(CONVERTED_RESULT_INVERSE, mSuccess.getResult());
+    }
+
+    @Test
+    public void shouldVerifyEquals() {
+        TemperatureConvertedSuccessful newSuccess = new TemperatureConvertedSuccessful(CONVERTED_RESULT);
+        TemperatureConvertedSuccessful customSuccess = new TemperatureConvertedSuccessful(CONVERTED_RESULT_INVERSE);
+
+        assertTrue(mSuccess.equals(mSuccess));
+
+        assertFalse(mSuccess.equals(null));
+        assertFalse(mSuccess.equals(new String()));
+
+        assertTrue(mSuccess.equals(newSuccess));
+
+        assertFalse(customSuccess.equals(mSuccess));
+        assertFalse(customSuccess.hashCode() == mSuccess.hashCode());
+
+        customSuccess = new TemperatureConvertedSuccessful(null);
+        assertFalse(customSuccess.equals(mSuccess));
+        assertFalse(customSuccess.hashCode() == mSuccess.hashCode());
+
+        newSuccess = new TemperatureConvertedSuccessful(null);
+        assertTrue(customSuccess.equals(newSuccess));
     }
 
     @Test
