@@ -1,6 +1,6 @@
 package com.alexzh.temperatureconverter.presentation.converter;
 
-import com.alexzh.temperatureconverter.calculation.ConverterTemperatureFactory;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
@@ -15,11 +15,11 @@ import javax.inject.Inject;
 public class TemperatureConverterPresenter implements MvpPresenter<TemperatureConverterView> {
     private TemperatureConverterView mView;
     private EventBus mEventBus;
-    private ConverterTemperatureFactory mConverterTemperatureFactory;
+    private ConvertTemperature mConvertTemperature;
 
     @Inject
-    public TemperatureConverterPresenter(ConverterTemperatureFactory converterTemperatureFactory, EventBus eventBus) {
-        this.mConverterTemperatureFactory = converterTemperatureFactory;
+    public TemperatureConverterPresenter(ConvertTemperature convertTemperature, EventBus eventBus) {
+        this.mConvertTemperature = convertTemperature;
         this.mEventBus = eventBus;
     }
 
@@ -36,7 +36,7 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
                 double inputValue = Double.valueOf(mView.getInputValue());
                 Temperature from = mView.getFromTemperatureUnit();
                 Temperature to = mView.getToTemperatureUnit();
-                mConverterTemperatureFactory.getTemperatureConverter().convertData(new InputData(inputValue, from, to));
+                mConvertTemperature.execute(new InputData(inputValue, from, to));
             } catch (NumberFormatException ex) {
                 mEventBus.post(new TemperatureConvertedError("ERROR"));
             }
