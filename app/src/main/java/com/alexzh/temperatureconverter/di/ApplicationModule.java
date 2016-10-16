@@ -5,6 +5,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
 
+import com.alexzh.temperatureconverter.executor.InteractorExecutor;
+import com.alexzh.temperatureconverter.executor.MainThreadExecutor;
+import com.alexzh.temperatureconverter.executor.MainThreadExecutorImp;
+import com.alexzh.temperatureconverter.executor.ThreadExecutor;
 import com.alexzh.temperatureconverter.service.SharedPreferenceManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -41,5 +45,15 @@ public class ApplicationModule {
     @Provides @Singleton
     public SharedPreferenceManager provideSharedPreferenceManager(SharedPreferences sharedPreferences) {
         return new SharedPreferenceManager(sharedPreferences);
+    }
+
+    @Provides
+    public InteractorExecutor provideInteractorExecutor() {
+        return new ThreadExecutor();
+    }
+
+    @Provides
+    public MainThreadExecutor provideMainThreadExecutor() {
+        return new MainThreadExecutorImp();
     }
 }
