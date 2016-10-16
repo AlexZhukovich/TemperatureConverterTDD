@@ -2,6 +2,7 @@ package com.alexzh.temperatureconverter.presentation;
 
 import com.alexzh.temperatureconverter.calculation.ConverterTemperatureFactory;
 import com.alexzh.temperatureconverter.calculation.offline.OfflineConvertTemperature;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterPresenter;
@@ -39,6 +40,9 @@ public class TemperatureConverterPresenterTest {
     private ConverterTemperatureFactory mTemperatureFactory;
 
     @Mock
+    private ConvertTemperature mConvertTemperature;
+
+    @Mock
     private OfflineConvertTemperature mConverter;
 
     private TemperatureConverterPresenter mPresenter;
@@ -47,7 +51,7 @@ public class TemperatureConverterPresenterTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mPresenter = new TemperatureConverterPresenter(mTemperatureFactory, mEventBus);
+        mPresenter = new TemperatureConverterPresenter(mConvertTemperature, mEventBus);
 
         when(mView.getInputValue()).thenReturn(INPUT_VALUE_STR);
         when(mView.getFromTemperatureUnit()).thenReturn(FROM_TEMPERATURE_UNIT);
@@ -57,7 +61,7 @@ public class TemperatureConverterPresenterTest {
     @Test
     public void shouldVerifyConvertDataSuccessfulWithCorrectView() {
         when(mTemperatureFactory.getTemperatureConverter()).thenReturn(mConverter);
-        doNothing().when(mConverter).convertData(any(InputData.class));
+        doNothing().when(mConverter).convertData(any(InputData.class), any(ConvertTemperature.Callback.class));
 
         mPresenter.attachView(mView);
         mPresenter.convertTemperature();

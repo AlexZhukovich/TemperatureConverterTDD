@@ -1,5 +1,6 @@
 package com.alexzh.temperatureconverter.calculation.online;
 
+import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
 import com.alexzh.temperatureconverter.model.ConvertedResult;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
@@ -35,6 +36,9 @@ public class OnlineConverterTemperatureTest {
     private EventBus mEventBus;
 
     @Mock
+    private ConvertTemperature.Callback mCallback;
+
+    @Mock
     private TemperatureConverterApiService mApiService;
 
     @Mock
@@ -64,11 +68,11 @@ public class OnlineConverterTemperatureTest {
         when(mApiService.getConvertedData(anyString(), anyString(), anyString())).thenReturn(mCall);
         Response<ConvertedResult> response = Response.success(mConvertedResult);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         verify(mCall).enqueue(argumentCapture.capture());
         argumentCapture.getValue().onResponse(null, response);
 
-        verify(mEventBus).post(new TemperatureConvertedSuccessful(mConvertedResult));
+        verify(mCallback).onResult(new TemperatureConvertedSuccessful(mConvertedResult));
     }
 
     @Test
@@ -76,11 +80,11 @@ public class OnlineConverterTemperatureTest {
         when(mApiService.getConvertedData(anyString(), anyString(), anyString())).thenReturn(mCall);
         Response<ConvertedResult> response = Response.error(500, mResponseBody);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         verify(mCall).enqueue(argumentCapture.capture());
         argumentCapture.getValue().onResponse(null, response);
 
-        verify(mEventBus).post(new TemperatureConvertedError("Response error"));
+        verify(mCallback).onError(new TemperatureConvertedError("Response error"));
     }
 
     @Test
@@ -88,11 +92,11 @@ public class OnlineConverterTemperatureTest {
         when(mApiService.getConvertedData(anyString(), anyString(), anyString())).thenReturn(mCall);
         Throwable throwable = new Throwable(new RuntimeException());
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         verify(mCall).enqueue(argumentCapture.capture());
         argumentCapture.getValue().onFailure(null, throwable);
 
-        verify(mEventBus).post(new TemperatureConvertedError("ERROR"));
+        verify(mCallback).onError(new TemperatureConvertedError("ERROR"));
     }
 
 }

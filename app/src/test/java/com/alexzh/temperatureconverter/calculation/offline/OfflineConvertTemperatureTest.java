@@ -1,5 +1,6 @@
 package com.alexzh.temperatureconverter.calculation.offline;
 
+import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
@@ -27,6 +28,9 @@ public class OfflineConvertTemperatureTest {
     @Mock
     private EventBus mEventBus;
 
+    @Mock
+    private ConvertTemperature.Callback mCallback;
+
     private OfflineConvertTemperature mConverter;
     private InputData mInputData;
     private TemperatureConvertedSuccessful mSuccessful;
@@ -53,9 +57,9 @@ public class OfflineConvertTemperatureTest {
         mInputData = new InputData(CELSIUS_TEMPERATURE, Temperature.CELSIUS, Temperature.FAHRENHEIT);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, result);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         assertEquals(FAHRENHEIT_TEMPERATURE, result, 0.0001);
-        verify(mEventBus).post(mSuccessful);
+        verify(mCallback).onResult(mSuccessful);
     }
 
     @Test
@@ -65,9 +69,9 @@ public class OfflineConvertTemperatureTest {
         mInputData = new InputData(FAHRENHEIT_TEMPERATURE, Temperature.FAHRENHEIT, Temperature.CELSIUS);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, result);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         assertEquals(CELSIUS_TEMPERATURE, result, 0.0001);
-        verify(mEventBus).post(mSuccessful);
+        verify(mCallback).onResult(mSuccessful);
     }
 
     @Test
@@ -77,9 +81,9 @@ public class OfflineConvertTemperatureTest {
         mInputData = new InputData(CELSIUS_TEMPERATURE, Temperature.CELSIUS, Temperature.KELVIN);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, result);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         assertEquals(KELVIN_TEMPERATURE, result, 0.0001);
-        verify(mEventBus).post(mSuccessful);
+        verify(mCallback).onResult(mSuccessful);
     }
 
     @Test
@@ -89,9 +93,9 @@ public class OfflineConvertTemperatureTest {
         mInputData = new InputData(KELVIN_TEMPERATURE, Temperature.KELVIN, Temperature.CELSIUS);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, result);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         assertEquals(CELSIUS_TEMPERATURE, result, 0.0001);
-        verify(mEventBus).post(mSuccessful);
+        verify(mCallback).onResult(mSuccessful);
     }
 
     @Test
@@ -101,9 +105,9 @@ public class OfflineConvertTemperatureTest {
         mInputData = new InputData(FAHRENHEIT_TEMPERATURE, Temperature.FAHRENHEIT, Temperature.KELVIN);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, result);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         assertEquals(KELVIN_TEMPERATURE, result, 0.0001);
-        verify(mEventBus).post(mSuccessful);
+        verify(mCallback).onResult(mSuccessful);
     }
 
     @Test
@@ -113,44 +117,44 @@ public class OfflineConvertTemperatureTest {
         mInputData = new InputData(KELVIN_TEMPERATURE, Temperature.KELVIN, Temperature.FAHRENHEIT);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, result);
 
-        mConverter.convertData(mInputData);
+        mConverter.convertData(mInputData, mCallback);
         assertEquals(FAHRENHEIT_TEMPERATURE, result, 0.0001);
-        verify(mEventBus).post(mSuccessful);
+        verify(mCallback).onResult(mSuccessful);
     }
 
     @Test
     public void shouldConvertIncorrectData() {
-        mConverter.convertData(null);
-        verify(mEventBus, times(1)).post(mError);
+        mConverter.convertData(null, mCallback);
+        verify(mCallback, times(1)).onError(mError);
 
         mInputData = new InputData(CELSIUS_TEMPERATURE, null, Temperature.KELVIN);
-        mConverter.convertData(mInputData);
-        verify(mEventBus, times(2)).post(mError);
+        mConverter.convertData(mInputData, mCallback);
+        verify(mCallback, times(2)).onError(mError);
 
         mInputData = new InputData(CELSIUS_TEMPERATURE, Temperature.CELSIUS, null);
-        mConverter.convertData(mInputData);
-        verify(mEventBus, times(3)).post(mError);
+        mConverter.convertData(mInputData, mCallback);
+        verify(mCallback, times(3)).onError(mError);
 
         mInputData = new InputData(CELSIUS_TEMPERATURE, null, null);
-        mConverter.convertData(mInputData);
-        verify(mEventBus, times(4)).post(mError);
+        mConverter.convertData(mInputData, mCallback);
+        verify(mCallback, times(4)).onError(mError);
     }
 
     @Test
     public void shouldConvertToTheSameTemperature() {
         mInputData = new InputData(CELSIUS_TEMPERATURE, Temperature.CELSIUS, Temperature.CELSIUS);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, CELSIUS_TEMPERATURE);
-        mConverter.convertData(mInputData);
-        verify(mEventBus).post(mSuccessful);
+        mConverter.convertData(mInputData, mCallback);
+        verify(mCallback).onResult(mSuccessful);
 
         mInputData = new InputData(FAHRENHEIT_TEMPERATURE, Temperature.FAHRENHEIT, Temperature.FAHRENHEIT);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, FAHRENHEIT_TEMPERATURE);
-        mConverter.convertData(mInputData);
-        verify(mEventBus).post(mSuccessful);
+        mConverter.convertData(mInputData, mCallback);
+        verify(mCallback).onResult(mSuccessful);
 
         mInputData = new InputData(KELVIN_TEMPERATURE, Temperature.KELVIN, Temperature.KELVIN);
         mSuccessful = mConverter.createTemperatureSuccessfulValue(mInputData, KELVIN_TEMPERATURE);
-        mConverter.convertData(mInputData);
-        verify(mEventBus).post(mSuccessful);
+        mConverter.convertData(mInputData, mCallback);
+        verify(mCallback).onResult(mSuccessful);
     }
 }
