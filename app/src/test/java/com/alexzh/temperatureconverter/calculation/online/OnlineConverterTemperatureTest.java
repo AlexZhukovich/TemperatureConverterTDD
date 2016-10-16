@@ -52,7 +52,7 @@ public class OnlineConverterTemperatureTest {
 
     @Before
     public void setup() {
-        mConverter = new OnlineConverterTemperature(mApiService, mEventBus);
+        mConverter = new OnlineConverterTemperature(mApiService);
         mInputData = new InputData(100, Temperature.CELSIUS, Temperature.KELVIN);
         mConvertedResult = new ConvertedResult(10, Temperature.KELVIN, mInputData);
     }

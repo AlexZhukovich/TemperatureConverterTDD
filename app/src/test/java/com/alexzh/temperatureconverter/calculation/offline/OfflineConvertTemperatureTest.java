@@ -41,7 +41,7 @@ public class OfflineConvertTemperatureTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mConverter = new OfflineConvertTemperature(mEventBus);
+        mConverter = new OfflineConvertTemperature();
         mError = mConverter.createTemperatureErrorValue();
     }
 

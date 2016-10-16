@@ -23,9 +23,9 @@ public class ConverterTemperatureFactory {
 
     public ConvertTemperatureRepository getTemperatureConverter() {
         if (mPreferenceManager.isConvertOnline()) {
-            return new OnlineConverterTemperature(mApiService, mEventBus);
+            return new OnlineConverterTemperature(mApiService);
         } else {
-            return new OfflineConvertTemperature(mEventBus);
+            return new OfflineConvertTemperature();
         }
     }
 
