@@ -1,6 +1,7 @@
 package com.alexzh.temperatureconverter.calculation.offline;
 
 import com.alexzh.temperatureconverter.calculation.ConvertTemperatureRepository;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
 import com.alexzh.temperatureconverter.model.ConvertedResult;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
@@ -14,33 +15,30 @@ import javax.inject.Inject;
 public class OfflineConvertTemperature implements ConvertTemperatureRepository {
     public final static String CALCULATION_ERROR = "Calculation error";
 
-    private EventBus mEventBus;
-
     @Inject
-    public OfflineConvertTemperature(EventBus eventBus) {
-        this.mEventBus = eventBus;
+    public OfflineConvertTemperature() {
     }
 
     @Override
-    public void convertData(InputData inputData) {
+    public void convertData(InputData inputData, ConvertTemperature.Callback callback) {
         if (inputData != null && inputData.getFromUnit() != null && inputData.getToUnit() != null) {
             if (inputData.getFromUnit().equals(Temperature.CELSIUS) && inputData.getToUnit().equals(Temperature.FAHRENHEIT)) {
-                mEventBus.post(createTemperatureSuccessfulValue(inputData, convertFromCelsiusToFahrenheit(inputData.getInputValue())));
+                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromCelsiusToFahrenheit(inputData.getInputValue())));
             } else if (inputData.getFromUnit().equals(Temperature.CELSIUS) && inputData.getToUnit().equals(Temperature.KELVIN)) {
-                mEventBus.post(createTemperatureSuccessfulValue(inputData, convertFromCelsiusToKelvin(inputData.getInputValue())));
+                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromCelsiusToKelvin(inputData.getInputValue())));
             } else if (inputData.getFromUnit().equals(Temperature.FAHRENHEIT) && inputData.getToUnit().equals(Temperature.CELSIUS)) {
-                mEventBus.post(createTemperatureSuccessfulValue(inputData, convertFromFahrenheitToCelsius(inputData.getInputValue())));
+                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromFahrenheitToCelsius(inputData.getInputValue())));
             } else if (inputData.getFromUnit().equals(Temperature.FAHRENHEIT) && inputData.getToUnit().equals(Temperature.KELVIN)) {
-                mEventBus.post(createTemperatureSuccessfulValue(inputData, convertFromFahrenheitToKelvin(inputData.getInputValue())));
+                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromFahrenheitToKelvin(inputData.getInputValue())));
             } else if (inputData.getFromUnit().equals(Temperature.KELVIN) && inputData.getToUnit().equals(Temperature.CELSIUS)) {
-                mEventBus.post(createTemperatureSuccessfulValue(inputData, convertFromKelvinToCelsius(inputData.getInputValue())));
+                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromKelvinToCelsius(inputData.getInputValue())));
             } else if (inputData.getFromUnit().equals(Temperature.KELVIN) && inputData.getToUnit().equals(Temperature.FAHRENHEIT)) {
-                mEventBus.post(createTemperatureSuccessfulValue(inputData, convertFromKelvinToFahrenheit(inputData.getInputValue())));
+                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromKelvinToFahrenheit(inputData.getInputValue())));
             } else {
-                mEventBus.post(createTemperatureSuccessfulValue(inputData, inputData.getInputValue()));
+                callback.onResult(createTemperatureSuccessfulValue(inputData, inputData.getInputValue()));
             }
         } else {
-            mEventBus.post(createTemperatureErrorValue());
+            callback.onError(createTemperatureErrorValue());
         }
     }
 

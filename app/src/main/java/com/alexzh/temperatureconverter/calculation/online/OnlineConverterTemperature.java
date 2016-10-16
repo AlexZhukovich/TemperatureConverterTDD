@@ -1,12 +1,11 @@
 package com.alexzh.temperatureconverter.calculation.online;
 
 import com.alexzh.temperatureconverter.calculation.ConvertTemperatureRepository;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
 import com.alexzh.temperatureconverter.model.ConvertedResult;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedSuccessful;
-
-import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -16,16 +15,14 @@ import retrofit2.Response;
 
 public class OnlineConverterTemperature implements ConvertTemperatureRepository {
     private TemperatureConverterApiService mApiService;
-    private EventBus mEventBus;
 
     @Inject
-    public OnlineConverterTemperature(TemperatureConverterApiService apiService, EventBus eventBus) {
+    public OnlineConverterTemperature(TemperatureConverterApiService apiService) {
         this.mApiService = apiService;
-        this.mEventBus = eventBus;
     }
 
     @Override
-    public void convertData(final InputData inputData) {
+    public void convertData(final InputData inputData, final ConvertTemperature.Callback callback) {
         mApiService.getConvertedData(
                 String.valueOf(inputData.getInputValue()),
                 inputData.getFromUnit().toString(),
@@ -34,16 +31,16 @@ public class OnlineConverterTemperature implements ConvertTemperatureRepository 
                     public void onResponse(Call<ConvertedResult> call, Response<ConvertedResult> response) {
                         int code = response.code();
                         if (code == 200) {
-                            mEventBus.post(new TemperatureConvertedSuccessful(new ConvertedResult(response.body().getResult(), inputData.getToUnit(), inputData)));
+                            callback.onResult(new TemperatureConvertedSuccessful(new ConvertedResult(response.body().getResult(), inputData.getToUnit(), inputData)));
                         } else {
-                            mEventBus.post(new TemperatureConvertedError("Response error"));
+                            callback.onError(new TemperatureConvertedError("Response error"));
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ConvertedResult> call, Throwable t) {
-                        mEventBus.post(new TemperatureConvertedError("ERROR"));
-            }
+                        callback.onError(new TemperatureConvertedError("ERROR"));
+                    }
         });
     }
 }
