@@ -1,7 +1,7 @@
 package com.alexzh.temperatureconverter.calculation.online;
 
 import com.alexzh.temperatureconverter.calculation.ConvertTemperatureRepository;
-import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperatureUseCase;
 import com.alexzh.temperatureconverter.model.ConvertedResult;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
@@ -22,7 +22,7 @@ public class OnlineConverterTemperature implements ConvertTemperatureRepository 
     }
 
     @Override
-    public void convertData(final InputData inputData, final ConvertTemperature.Callback callback) {
+    public void convertData(final InputData inputData, final ConvertTemperatureUseCase.Callback callback) {
         mApiService.getConvertedData(
                 String.valueOf(inputData.getInputValue()),
                 inputData.getFromUnit().toString(),

@@ -1,14 +1,12 @@
 package com.alexzh.temperatureconverter.calculation.offline;
 
 import com.alexzh.temperatureconverter.calculation.ConvertTemperatureRepository;
-import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperatureUseCase;
 import com.alexzh.temperatureconverter.model.ConvertedResult;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedSuccessful;
-
-import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
@@ -20,7 +18,7 @@ public class OfflineConvertTemperature implements ConvertTemperatureRepository {
     }
 
     @Override
-    public void convertData(InputData inputData, ConvertTemperature.Callback callback) {
+    public void convertData(InputData inputData, ConvertTemperatureUseCase.Callback callback) {
         if (inputData != null && inputData.getFromUnit() != null && inputData.getToUnit() != null) {
             if (inputData.getFromUnit().equals(Temperature.CELSIUS) && inputData.getToUnit().equals(Temperature.FAHRENHEIT)) {
                 callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromCelsiusToFahrenheit(inputData.getInputValue())));

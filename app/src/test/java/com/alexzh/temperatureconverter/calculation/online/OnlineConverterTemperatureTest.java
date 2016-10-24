@@ -1,6 +1,6 @@
 package com.alexzh.temperatureconverter.calculation.online;
 
-import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperatureUseCase;
 import com.alexzh.temperatureconverter.model.ConvertedResult;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
@@ -19,6 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+
 import retrofit2.Response;
 
 import static org.junit.Assert.assertNotNull;
@@ -36,7 +37,7 @@ public class OnlineConverterTemperatureTest {
     private EventBus mEventBus;
 
     @Mock
-    private ConvertTemperature.Callback mCallback;
+    private ConvertTemperatureUseCase.Callback mCallback;
 
     @Mock
     private TemperatureConverterApiService mApiService;

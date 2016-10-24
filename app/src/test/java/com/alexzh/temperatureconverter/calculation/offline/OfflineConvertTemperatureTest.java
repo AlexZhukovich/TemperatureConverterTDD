@@ -1,6 +1,6 @@
 package com.alexzh.temperatureconverter.calculation.offline;
 
-import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperatureUseCase;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
@@ -29,7 +29,7 @@ public class OfflineConvertTemperatureTest {
     private EventBus mEventBus;
 
     @Mock
-    private ConvertTemperature.Callback mCallback;
+    private ConvertTemperatureUseCase.Callback mCallback;
 
     private OfflineConvertTemperature mConverter;
     private InputData mInputData;

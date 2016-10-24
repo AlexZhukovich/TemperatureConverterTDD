@@ -1,6 +1,6 @@
 package com.alexzh.temperatureconverter.presentation.converter;
 
-import com.alexzh.temperatureconverter.interactor.ConvertTemperature;
+import com.alexzh.temperatureconverter.interactor.ConvertTemperatureUseCase;
 import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.Temperature;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
@@ -15,11 +15,11 @@ import javax.inject.Inject;
 public class TemperatureConverterPresenter implements MvpPresenter<TemperatureConverterView> {
     private TemperatureConverterView mView;
     private EventBus mEventBus;
-    private ConvertTemperature mConvertTemperature;
+    private ConvertTemperatureUseCase mConvertTemperatureUseCase;
 
     @Inject
-    public TemperatureConverterPresenter(ConvertTemperature convertTemperature, EventBus eventBus) {
-        this.mConvertTemperature = convertTemperature;
+    public TemperatureConverterPresenter(ConvertTemperatureUseCase convertTemperature, EventBus eventBus) {
+        this.mConvertTemperatureUseCase = convertTemperature;
         this.mEventBus = eventBus;
     }
 
@@ -36,7 +36,7 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
                 double inputValue = Double.valueOf(mView.getInputValue());
                 Temperature from = mView.getFromTemperatureUnit();
                 Temperature to = mView.getToTemperatureUnit();
-                mConvertTemperature.execute(new InputData(inputValue, from, to));
+                mConvertTemperatureUseCase.execute(new InputData(inputValue, from, to));
             } catch (NumberFormatException ex) {
                 mEventBus.post(new TemperatureConvertedError("ERROR"));
             }
@@ -51,14 +51,14 @@ public class TemperatureConverterPresenter implements MvpPresenter<TemperatureCo
 
     @Subscribe
     public void onEvent(TemperatureConvertedSuccessful event) {
-        mView.setOutputValue(event.getResult().getResult());
+        mView.displayResult(event.getResult().getResult());
         mView.hideProgress();
     }
 
     @Subscribe
     public void onEvent(TemperatureConvertedError event) {
         mView.displayErrorMessage(event.getMessage());
-        mView.setOutputValue(0.0);
+        mView.displayResult(0.0);
         mView.hideProgress();
     }
 

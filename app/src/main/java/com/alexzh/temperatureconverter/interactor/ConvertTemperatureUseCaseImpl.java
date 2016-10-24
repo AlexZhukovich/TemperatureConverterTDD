@@ -11,13 +11,13 @@ import org.greenrobot.eventbus.EventBus;
 
 import javax.inject.Inject;
 
-public class ConvertTemperatureImpl extends UseCase implements ConvertTemperature {
+public class ConvertTemperatureUseCaseImpl extends UseCase implements ConvertTemperatureUseCase {
     private ConverterTemperatureFactory mConverterTemperatureFactory;
     private InputData mInputData;
     private EventBus mEventBus;
 
     @Inject
-    public ConvertTemperatureImpl(EventBus eventBus,
+    public ConvertTemperatureUseCaseImpl(EventBus eventBus,
                                   ConverterTemperatureFactory converterTemperatureFactory,
                                   InteractorExecutor interactorExecutor,
                                   MainThreadExecutor mainThreadExecutor) {

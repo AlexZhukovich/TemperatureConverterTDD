@@ -4,7 +4,7 @@ import com.alexzh.temperatureconverter.model.InputData;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedError;
 import com.alexzh.temperatureconverter.model.event.TemperatureConvertedSuccessful;
 
-public interface ConvertTemperature {
+public interface ConvertTemperatureUseCase {
 
     void execute(InputData data);
 

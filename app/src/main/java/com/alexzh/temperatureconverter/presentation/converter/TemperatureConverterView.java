@@ -11,7 +11,7 @@ public interface TemperatureConverterView extends MvpView {
 
     Temperature getToTemperatureUnit();
 
-    void setOutputValue(double value);
+    void displayResult(double value);
 
     void displayProgress();
 

@@ -131,7 +131,7 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
     }
 
     @Override
-    public void setOutputValue(double value) {
+    public void displayResult(double value) {
         mOutputView.setText(getString(R.string.output_text_format, value));
     }
 
