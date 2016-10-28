@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 apply plugin: 'jacoco'
-
+apply from: 'qa-check.gradle'
 
 android {
     compileSdkVersion 24

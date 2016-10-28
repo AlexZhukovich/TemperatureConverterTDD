@@ -39,8 +39,10 @@ test:
         - adb shell settings put global animator_duration_scale 0
     override:
         - ./gradlew createDebugCoverageReport jacocoTestReport
+        - ./gradlew :app:checkstyle
     post:
         - cp -r app/build/outputs/apk $CIRCLE_ARTIFACTS
         - cp -r app/build/reports/androidTests $CIRCLE_ARTIFACTS
         - cp -r app/build/reports/tests $CIRCLE_ARTIFACTS
         - cp -r app/build/reports/jacoco/jacocoTestReport $CIRCLE_ARTIFACTS
+        - cp -r app/build/reports/checkstyle $CIRCLE_ARTIFACTS

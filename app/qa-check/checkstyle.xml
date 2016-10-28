@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<module name="Checker">
+    <module name="FileLength"><property name="max" value="400"/></module>
+
+    <module name="TreeWalker">
+        <module name="MethodLength"><property name="max" value="40"/></module>
+        <module name="LineLength"><property name="max" value="120"/></module>
+        <module name="ParameterNumber"><property name="max" value="4"/></module>
+        <module name="NestedIfDepth"><property name="max" value="4"/></module>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <module name="MethodName"/>
+        <module name="PackageName"/>
+
+        <module name="EmptyForIteratorPad" />
+        <module name="GenericWhitespace" />
+        <module name="MethodParamPad" />
+        <module name="NoWhitespaceAfter" />
+        <module name="NoWhitespaceBefore" />
+        <module name="OperatorWrap" />
+        <module name="ParenPad" />
+        <module name="TypecastParenPad" />
+        <module name="WhitespaceAfter" />
+
+        <!-- Checks for blocks -->
+        <module name="NeedBraces"/>
+        <module name="FileContentsHolder"/>
+    </module>
+
+    <!-- Space after 'for' and 'if' -->
+    <module name="RegexpSingleline">
+        <property name="format" value="^\s*(for|if)[^ ]\("/>
+        <property name="message" value="Space needed before opening parenthesis."/>
+    </module>
+
+</module>
