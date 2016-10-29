@@ -20,18 +20,36 @@ public class OfflineConvertTemperature implements ConvertTemperatureRepository {
     @Override
     public void convertData(InputData inputData, ConvertTemperatureUseCase.Callback callback) {
         if (inputData != null && inputData.getFromUnit() != null && inputData.getToUnit() != null) {
-            if (inputData.getFromUnit().equals(Temperature.CELSIUS) && inputData.getToUnit().equals(Temperature.FAHRENHEIT)) {
-                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromCelsiusToFahrenheit(inputData.getInputValue())));
-            } else if (inputData.getFromUnit().equals(Temperature.CELSIUS) && inputData.getToUnit().equals(Temperature.KELVIN)) {
-                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromCelsiusToKelvin(inputData.getInputValue())));
-            } else if (inputData.getFromUnit().equals(Temperature.FAHRENHEIT) && inputData.getToUnit().equals(Temperature.CELSIUS)) {
-                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromFahrenheitToCelsius(inputData.getInputValue())));
-            } else if (inputData.getFromUnit().equals(Temperature.FAHRENHEIT) && inputData.getToUnit().equals(Temperature.KELVIN)) {
-                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromFahrenheitToKelvin(inputData.getInputValue())));
-            } else if (inputData.getFromUnit().equals(Temperature.KELVIN) && inputData.getToUnit().equals(Temperature.CELSIUS)) {
-                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromKelvinToCelsius(inputData.getInputValue())));
-            } else if (inputData.getFromUnit().equals(Temperature.KELVIN) && inputData.getToUnit().equals(Temperature.FAHRENHEIT)) {
-                callback.onResult(createTemperatureSuccessfulValue(inputData, convertFromKelvinToFahrenheit(inputData.getInputValue())));
+            if (inputData.getFromUnit().equals(Temperature.CELSIUS)
+                    && inputData.getToUnit().equals(Temperature.FAHRENHEIT)) {
+
+                callback.onResult(createTemperatureSuccessfulValue(
+                        inputData, convertFromCelsiusToFahrenheit(inputData.getInputValue())));
+            } else if (inputData.getFromUnit().equals(Temperature.CELSIUS)
+                    && inputData.getToUnit().equals(Temperature.KELVIN)) {
+
+                callback.onResult(createTemperatureSuccessfulValue(
+                        inputData, convertFromCelsiusToKelvin(inputData.getInputValue())));
+            } else if (inputData.getFromUnit().equals(Temperature.FAHRENHEIT)
+                    && inputData.getToUnit().equals(Temperature.CELSIUS)) {
+
+                callback.onResult(createTemperatureSuccessfulValue(
+                        inputData, convertFromFahrenheitToCelsius(inputData.getInputValue())));
+            } else if (inputData.getFromUnit().equals(Temperature.FAHRENHEIT)
+                    && inputData.getToUnit().equals(Temperature.KELVIN)) {
+
+                callback.onResult(createTemperatureSuccessfulValue(
+                        inputData, convertFromFahrenheitToKelvin(inputData.getInputValue())));
+            } else if (inputData.getFromUnit().equals(Temperature.KELVIN)
+                    && inputData.getToUnit().equals(Temperature.CELSIUS)) {
+
+                callback.onResult(createTemperatureSuccessfulValue(
+                        inputData, convertFromKelvinToCelsius(inputData.getInputValue())));
+            } else if (inputData.getFromUnit().equals(Temperature.KELVIN)
+                    && inputData.getToUnit().equals(Temperature.FAHRENHEIT)) {
+
+                callback.onResult(createTemperatureSuccessfulValue(
+                        inputData, convertFromKelvinToFahrenheit(inputData.getInputValue())));
             } else {
                 callback.onResult(createTemperatureSuccessfulValue(inputData, inputData.getInputValue()));
             }

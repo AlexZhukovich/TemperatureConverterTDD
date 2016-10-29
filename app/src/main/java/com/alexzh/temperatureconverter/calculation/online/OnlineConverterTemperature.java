@@ -31,7 +31,11 @@ public class OnlineConverterTemperature implements ConvertTemperatureRepository 
                     public void onResponse(Call<ConvertedResult> call, Response<ConvertedResult> response) {
                         int code = response.code();
                         if (code == 200) {
-                            callback.onResult(new TemperatureConvertedSuccessful(new ConvertedResult(response.body().getResult(), inputData.getToUnit(), inputData)));
+                            callback.onResult(new TemperatureConvertedSuccessful(
+                                    new ConvertedResult(
+                                            response.body().getResult(),
+                                            inputData.getToUnit(),
+                                            inputData)));
                         } else {
                             callback.onError(new TemperatureConvertedError("Response error"));
                         }

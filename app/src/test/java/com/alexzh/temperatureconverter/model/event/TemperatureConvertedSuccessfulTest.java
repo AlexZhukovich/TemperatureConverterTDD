@@ -22,7 +22,8 @@ public class TemperatureConvertedSuccessfulTest {
     private final static InputData INPUT_DATA = new InputData(INPUT_VALUE, FROM_UNIT, TO_UNIT);
     private final static InputData INPUT_DATA_INVERSE = new InputData(RESULT_VALUE, TO_UNIT, FROM_UNIT);
     private final static ConvertedResult CONVERTED_RESULT = new ConvertedResult(RESULT_VALUE, TO_UNIT, INPUT_DATA);
-    private final static ConvertedResult CONVERTED_RESULT_INVERSE = new ConvertedResult(INPUT_VALUE, FROM_UNIT, INPUT_DATA_INVERSE);
+    private final static ConvertedResult CONVERTED_RESULT_INVERSE =
+            new ConvertedResult(INPUT_VALUE, FROM_UNIT, INPUT_DATA_INVERSE);
 
     private TemperatureConvertedSuccessful mSuccess;
 

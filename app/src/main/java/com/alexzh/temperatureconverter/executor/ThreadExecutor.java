@@ -15,7 +15,8 @@ public class ThreadExecutor implements InteractorExecutor {
     private ThreadPoolExecutor mThreadPoolExecutor;
 
     public ThreadExecutor() {
-        mThreadPoolExecutor = new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME, TIME_UNIT, WORK_QUEUE);
+        mThreadPoolExecutor =
+                new ThreadPoolExecutor(CORE_POOL_SIZE, MAX_POOL_SIZE, KEEP_ALIVE_TIME, TIME_UNIT, WORK_QUEUE);
     }
 
     @Override

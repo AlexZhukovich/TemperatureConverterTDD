@@ -54,7 +54,9 @@ public class TemperatureConverterActivityTest {
 
     @Before
     public void setUp() {
-        mVisibilityIdlingResource = new ViewVisibilityIdlingResource(mRule.getActivity().findViewById(R.id.outputView), View.VISIBLE);
+        mVisibilityIdlingResource =
+                new ViewVisibilityIdlingResource(mRule.getActivity().findViewById(R.id.outputView), View.VISIBLE);
+
         final TemperatureConverterActivity activity = mRule.getActivity();
         Runnable wakeUpDevice = new Runnable() {
             public void run() {
