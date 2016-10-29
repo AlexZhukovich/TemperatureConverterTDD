@@ -1,5 +1,7 @@
 package com.alexzh.temperatureconverter.model;
 
+import java.util.Locale;
+
 public class ConvertedResult {
 
     private double result;
@@ -26,13 +28,21 @@ public class ConvertedResult {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || (!(o instanceof ConvertedResult))) return false;
+        if (this == o)  {
+            return true;
+        }
+        if (o == null || (!(o instanceof ConvertedResult))) {
+            return false;
+        }
 
         ConvertedResult that = (ConvertedResult) o;
 
-        if (Double.compare(that.result, result) != 0) return false;
-        if (resultUnit != that.resultUnit) return false;
+        if (Double.compare(that.result, result) != 0) {
+            return false;
+        }
+        if (resultUnit != that.resultUnit)  {
+            return false;
+        }
         return inputData != null ? inputData.equals(that.inputData) : that.inputData == null;
 
     }
@@ -50,10 +60,8 @@ public class ConvertedResult {
 
     @Override
     public String toString() {
-        return "ConvertedResult{" +
-                "result=" + result +
-                ", resultUnit=" + resultUnit +
-                ", inputData=" + inputData +
-                '}';
+        return String.format(Locale.getDefault(),
+                "ConvertedResult{result=%.1f, resultUnit=%s, inputData=%s}",
+                result, resultUnit, inputData);
     }
 }

@@ -1,5 +1,7 @@
 package com.alexzh.temperatureconverter.model.event;
 
+import java.util.Locale;
+
 public class TemperatureConvertedError {
     private String mMessage;
 
@@ -13,8 +15,12 @@ public class TemperatureConvertedError {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || (!(o instanceof TemperatureConvertedError))) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || (!(o instanceof TemperatureConvertedError))) {
+            return false;
+        }
 
         TemperatureConvertedError that = (TemperatureConvertedError) o;
 
@@ -29,8 +35,8 @@ public class TemperatureConvertedError {
 
     @Override
     public String toString() {
-        return "TemperatureConvertedError{" +
-                "mMessage='" + mMessage + '\'' +
-                '}';
+        return String.format(Locale.getDefault(),
+                "TemperatureConvertedError{mMessage='%s'}",
+                mMessage);
     }
 }

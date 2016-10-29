@@ -2,6 +2,8 @@ package com.alexzh.temperatureconverter.model.event;
 
 import com.alexzh.temperatureconverter.model.ConvertedResult;
 
+import java.util.Locale;
+
 public class TemperatureConvertedSuccessful {
 
     private ConvertedResult mResult;
@@ -16,8 +18,12 @@ public class TemperatureConvertedSuccessful {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || (!(o instanceof TemperatureConvertedSuccessful))) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || (!(o instanceof TemperatureConvertedSuccessful))) {
+            return false;
+        }
 
         TemperatureConvertedSuccessful that = (TemperatureConvertedSuccessful) o;
 
@@ -32,8 +38,8 @@ public class TemperatureConvertedSuccessful {
 
     @Override
     public String toString() {
-        return "TemperatureConvertedSuccessful{" +
-                "mResult=" + mResult +
-                '}';
+        return String.format(Locale.getDefault(),
+                "TemperatureConvertedSuccessful{mResult=%s}",
+                mResult);
     }
 }

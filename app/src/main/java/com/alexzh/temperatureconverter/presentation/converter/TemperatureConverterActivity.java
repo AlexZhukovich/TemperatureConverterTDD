@@ -50,7 +50,7 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
         setContentView(R.layout.activity_temperature_converter);
 
         ButterKnife.bind(this);
-        ((TemperatureConverterApp)getApplication()).createTemperatureConverterComponent().inject(this);
+        ((TemperatureConverterApp) getApplication()).createTemperatureConverterComponent().inject(this);
 
         ArrayAdapter<String> temperatureUnitAdapter = new ArrayAdapter<>(
                 this, R.layout.item_unit_spinner, getResources().getStringArray(R.array.temperature_units));
@@ -171,7 +171,7 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
 
     @Override
     protected void onDestroy() {
-        ((TemperatureConverterApp)getApplication()).releaseTemperatureConverterComponent();
+        ((TemperatureConverterApp) getApplication()).releaseTemperatureConverterComponent();
         super.onDestroy();
     }
 }

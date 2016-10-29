@@ -60,9 +60,9 @@ public class TemperatureConverterActivityTest {
         final TemperatureConverterActivity activity = mRule.getActivity();
         Runnable wakeUpDevice = new Runnable() {
             public void run() {
-                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
-                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
-                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                        | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                        | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         };
         activity.runOnUiThread(wakeUpDevice);
@@ -276,9 +276,9 @@ public class TemperatureConverterActivityTest {
 
         Activity activity = mRule.getActivity();
         activity.setRequestedOrientation(
-                (orientation == Configuration.ORIENTATION_PORTRAIT) ?
-                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE :
-                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                (orientation == Configuration.ORIENTATION_PORTRAIT)
+                        ? ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                        : ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     private String getOutputString(double value) {
