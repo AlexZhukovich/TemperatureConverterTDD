@@ -12,7 +12,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterActivity;
+import com.alexzh.temperatureconverter.converter.TemperatureConverterActivity;
 
 import org.junit.After;
 import org.junit.Before;

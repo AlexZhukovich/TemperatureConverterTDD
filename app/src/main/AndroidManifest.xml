@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".di.TemperatureConverterApp">
-        <activity android:name=".presentation.converter.TemperatureConverterActivity">
+
+        <activity android:name=".converter.TemperatureConverterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,9 +20,10 @@
             </intent-filter>
         </activity>
 
+
         <activity
             android:label="@string/action_settings"
-            android:name=".presentation.settings.SettingsActivity" />
+            android:name=".settings.SettingsActivity" />
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@ import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.preference.PreferenceManager;
 import android.view.WindowManager;
 
-import com.alexzh.temperatureconverter.presentation.settings.SettingsActivity;
+import com.alexzh.temperatureconverter.settings.SettingsActivity;
 
 import org.junit.After;
 import org.junit.Before;

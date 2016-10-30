@@ -9,7 +9,7 @@ import com.alexzh.temperatureconverter.executor.InteractorExecutor;
 import com.alexzh.temperatureconverter.executor.MainThreadExecutor;
 import com.alexzh.temperatureconverter.executor.MainThreadExecutorImp;
 import com.alexzh.temperatureconverter.executor.ThreadExecutor;
-import com.alexzh.temperatureconverter.service.SharedPreferenceManager;
+import com.alexzh.temperatureconverter.utils.SharedPreferenceManager;
 
 import org.greenrobot.eventbus.EventBus;
 

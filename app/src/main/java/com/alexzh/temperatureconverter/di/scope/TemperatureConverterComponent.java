@@ -1,6 +1,6 @@
 package com.alexzh.temperatureconverter.di.scope;
 
-import com.alexzh.temperatureconverter.presentation.converter.TemperatureConverterActivity;
+import com.alexzh.temperatureconverter.converter.TemperatureConverterActivity;
 
 import dagger.Subcomponent;
 

@@ -1,10 +1,10 @@
 package com.alexzh.temperatureconverter.di.scope;
 
-import com.alexzh.temperatureconverter.calculation.ConverterTemperatureFactory;
+import com.alexzh.temperatureconverter.converter.usecase.ConvertTemperatureUseCase;
+import com.alexzh.temperatureconverter.converter.usecase.ConvertTemperatureUseCaseImpl;
+import com.alexzh.temperatureconverter.data.source.ConverterTemperatureFactory;
 import com.alexzh.temperatureconverter.executor.InteractorExecutor;
 import com.alexzh.temperatureconverter.executor.MainThreadExecutor;
-import com.alexzh.temperatureconverter.interactor.ConvertTemperatureUseCase;
-import com.alexzh.temperatureconverter.interactor.ConvertTemperatureUseCaseImpl;
 
 import org.greenrobot.eventbus.EventBus;
 

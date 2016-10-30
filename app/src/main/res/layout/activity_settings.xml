@@ -7,6 +7,6 @@
         android:id="@+id/settings_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.alexzh.temperatureconverter.presentation.settings.SettingsFragment"/>
+        android:name="com.alexzh.temperatureconverter.settings.SettingsFragment"/>
 
 </LinearLayout>

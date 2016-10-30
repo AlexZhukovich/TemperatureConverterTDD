@@ -1,6 +1,6 @@
 package com.alexzh.temperatureconverter.di.api;
 
-import com.alexzh.temperatureconverter.calculation.online.TemperatureConverterApiService;
+import com.alexzh.temperatureconverter.data.source.online.TemperatureConverterApiService;
 
 import javax.inject.Singleton;
 
