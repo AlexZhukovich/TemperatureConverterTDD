@@ -49,11 +49,7 @@ public class TemperatureConverterPresenterTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
 
-        mPresenter = new TemperatureConverterPresenter(mConvertTemperature, mEventBus);
-
-        when(mView.getInputValue()).thenReturn(INPUT_VALUE_STR);
-        when(mView.getFromTemperatureUnit()).thenReturn(FROM_TEMPERATURE_UNIT);
-        when(mView.getToTemperatureUnit()).thenReturn(TO_TEMPERATURE_UNIT);
+        mPresenter = new TemperatureConverterPresenterImpl(mConvertTemperature, mEventBus);
     }
 
     @Test
@@ -62,26 +58,20 @@ public class TemperatureConverterPresenterTest {
         doNothing().when(mConverter).convertData(any(InputData.class), any(ConvertTemperatureUseCase.Callback.class));
 
         mPresenter.attachView(mView);
-        mPresenter.convertTemperature();
+        mPresenter.convertTemperature(INPUT_VALUE_STR, FROM_TEMPERATURE_UNIT, TO_TEMPERATURE_UNIT);
         mPresenter.detachView();
 
         verify(mEventBus).register(any());
         verify(mView).displayProgress();
-        verify(mView, times(1)).getInputValue();
-        verify(mView, times(1)).getFromTemperatureUnit();
-        verify(mView, times(1)).getToTemperatureUnit();
         verify(mEventBus).unregister(any());
     }
 
     @Test
     public void shouldVerifyConvertDataWithNullView() {
         mPresenter.attachView(null);
-        mPresenter.convertTemperature();
+        mPresenter.convertTemperature(INPUT_VALUE_STR, FROM_TEMPERATURE_UNIT, TO_TEMPERATURE_UNIT);
         mPresenter.detachView();
 
-        verify(mView, never()).getInputValue();
-        verify(mView, never()).getFromTemperatureUnit();
-        verify(mView, never()).getToTemperatureUnit();
         verify(mView, never()).displayResult(anyDouble());
     }
 
@@ -91,9 +81,6 @@ public class TemperatureConverterPresenterTest {
         mPresenter.openSettings();
         mPresenter.detachView();
 
-        verify(mView, never()).getInputValue();
-        verify(mView, never()).getFromTemperatureUnit();
-        verify(mView, never()).getToTemperatureUnit();
         verify(mView, never()).displayResult(anyDouble());
         verify(mView, times(1)).launchSettingsActivity();
     }
@@ -104,9 +91,6 @@ public class TemperatureConverterPresenterTest {
         mPresenter.openSettings();
         mPresenter.detachView();
 
-        verify(mView, never()).getInputValue();
-        verify(mView, never()).getFromTemperatureUnit();
-        verify(mView, never()).getToTemperatureUnit();
         verify(mView, never()).displayResult(anyDouble());
         verify(mView, never()).launchSettingsActivity();
     }

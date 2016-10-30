@@ -1,5 +1,7 @@
 package com.alexzh.temperatureconverter.di.scope;
 
+import com.alexzh.temperatureconverter.converter.TemperatureConverterPresenter;
+import com.alexzh.temperatureconverter.converter.TemperatureConverterPresenterImpl;
 import com.alexzh.temperatureconverter.converter.usecase.ConvertTemperatureUseCase;
 import com.alexzh.temperatureconverter.converter.usecase.ConvertTemperatureUseCaseImpl;
 import com.alexzh.temperatureconverter.data.source.ConverterTemperatureFactory;
@@ -20,5 +22,11 @@ public class TemperatureConverterActivityModule {
                                                                InteractorExecutor interactorExecutor,
                                                                MainThreadExecutor mainThreadExecutor) {
         return new ConvertTemperatureUseCaseImpl(eventBus, converterFactory, interactorExecutor, mainThreadExecutor);
+    }
+
+    @Provides
+    public TemperatureConverterPresenter provideTemperatureConverterPresenter(ConvertTemperatureUseCase useCase,
+                                                                              EventBus eventBus) {
+        return new TemperatureConverterPresenterImpl(useCase, eventBus);
     }
 }

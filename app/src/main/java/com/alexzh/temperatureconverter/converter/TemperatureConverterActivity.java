@@ -89,17 +89,10 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
 
     @OnClick(R.id.convertButton)
     public void onConvertButtonClicked() {
-        mPresenter.convertTemperature();
-    }
-
-    @Override
-    public String getInputValue() {
-        return mInputView.getText().toString();
-    }
-
-    @Override
-    public Temperature getFromTemperatureUnit() {
-        return getTemperatureUnitFromSpinner(mInputUnitSpinner);
+        mPresenter.convertTemperature(
+                mInputView.getText().toString(),
+                getTemperatureUnitFromSpinner(mInputUnitSpinner),
+                getTemperatureUnitFromSpinner(mOutputUnitSpinner));
     }
 
     private Temperature getTemperatureUnitFromSpinner(Spinner spinner) {
@@ -124,11 +117,6 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mOutputView.setText(savedInstanceState.getString(LAST_RESULT));
-    }
-
-    @Override
-    public Temperature getToTemperatureUnit() {
-        return getTemperatureUnitFromSpinner(mOutputUnitSpinner);
     }
 
     @Override
