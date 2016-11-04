@@ -28,6 +28,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class TemperatureConverterActivity extends AppCompatActivity implements TemperatureConverterView {
+    private final static String ACTION_CELSIUS_TO_FAHRENHEIT
+            = "com.alexzh.temperatureconverter.ACTION_CELSIUS_TO_FAHRENHEIT";
+
+    private final static String ACTION_CELSIUS_TO_KELVIN
+            = "com.alexzh.temperatureconverter.ACTION_CELSIUS_TO_KELVIN";
+
+    private final static String ACTION_FAHRENHEIT_TO_CELSIUS
+            = "com.alexzh.temperatureconverter.ACTION_FAHRENHEIT_TO_CELSIUS";
+
+    private final static String ACTION_FAHRENHEIT_TO_KELVIN
+            = "com.alexzh.temperatureconverter.ACTION_FAHRENHEIT_TO_KELVIN";
+
     private final static String LAST_RESULT = "last_result";
     private final static int CELSIUS_POSITION = 0;
     private final static int FAHRENHEIT_POSITION = 1;
@@ -50,6 +62,26 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temperature_converter);
 
+        int defaultInputUnit;
+        int defaultOutputUnit;
+
+        if (ACTION_CELSIUS_TO_FAHRENHEIT.equals(getIntent().getAction())) {
+            defaultInputUnit = CELSIUS_POSITION;
+            defaultOutputUnit = FAHRENHEIT_POSITION;
+        } else if (ACTION_CELSIUS_TO_KELVIN.equals(getIntent().getAction())) {
+            defaultInputUnit = CELSIUS_POSITION;
+            defaultOutputUnit = KELVIN_POSITION;
+        } else if (ACTION_FAHRENHEIT_TO_CELSIUS.equals(getIntent().getAction())) {
+            defaultInputUnit = FAHRENHEIT_POSITION;
+            defaultOutputUnit = CELSIUS_POSITION;
+        } else if (ACTION_FAHRENHEIT_TO_KELVIN.equals(getIntent().getAction())) {
+            defaultInputUnit = FAHRENHEIT_POSITION;
+            defaultOutputUnit = KELVIN_POSITION;
+        } else {
+            defaultInputUnit = CELSIUS_POSITION;
+            defaultOutputUnit = FAHRENHEIT_POSITION;
+        }
+
         ButterKnife.bind(this);
         ((TemperatureConverterApp) getApplication()).createTemperatureConverterComponent().inject(this);
 
@@ -57,7 +89,9 @@ public class TemperatureConverterActivity extends AppCompatActivity implements T
                 this, R.layout.item_unit_spinner, getResources().getStringArray(R.array.temperature_units));
         temperatureUnitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mInputUnitSpinner.setAdapter(temperatureUnitAdapter);
+        mInputUnitSpinner.setSelection(defaultInputUnit);
         mOutputUnitSpinner.setAdapter(temperatureUnitAdapter);
+        mOutputUnitSpinner.setSelection(defaultOutputUnit);
 
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);

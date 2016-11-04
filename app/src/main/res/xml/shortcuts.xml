@@ -1,0 +1,54 @@
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="convertCelsiusToFahrenheit"
+        android:enabled="true"
+        android:icon="@mipmap/ic_c_to_f"
+        android:shortcutShortLabel="@string/shortcut_short_C_to_F"
+        android:shortcutLongLabel="@string/shortcut_long_C_to_F"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_C_to_F">>
+        <intent
+            android:action="com.alexzh.temperatureconverter.ACTION_CELSIUS_TO_FAHRENHEIT"
+            android:targetPackage="com.alexzh.temperatureconverter"
+            android:targetClass="com.alexzh.temperatureconverter.converter.TemperatureConverterActivity" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="convertCelsiusToKelvin"
+        android:enabled="true"
+        android:icon="@mipmap/ic_c_to_k"
+        android:shortcutShortLabel="@string/shortcut_short_C_to_K"
+        android:shortcutLongLabel="@string/shortcut_long_C_to_K"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_C_to_K">>
+        <intent
+            android:action="com.alexzh.temperatureconverter.ACTION_CELSIUS_TO_KELVIN"
+            android:targetPackage="com.alexzh.temperatureconverter"
+            android:targetClass="com.alexzh.temperatureconverter.converter.TemperatureConverterActivity" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="convertFahrenheitToCelsius"
+        android:enabled="true"
+        android:icon="@mipmap/ic_f_to_c"
+        android:shortcutShortLabel="@string/shortcut_short_F_to_C"
+        android:shortcutLongLabel="@string/shortcut_long_F_to_C"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_F_to_C">>
+        <intent
+            android:action="com.alexzh.temperatureconverter.ACTION_FAHRENHEIT_TO_CELSIUS"
+            android:targetPackage="com.alexzh.temperatureconverter"
+            android:targetClass="com.alexzh.temperatureconverter.converter.TemperatureConverterActivity" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="convertFahrenheitToKelvin"
+        android:enabled="true"
+        android:icon="@mipmap/ic_f_to_k"
+        android:shortcutShortLabel="@string/shortcut_short_F_to_K"
+        android:shortcutLongLabel="@string/shortcut_long_F_to_K"
+        android:shortcutDisabledMessage="@string/shortcut_disabled_F_to_K">>
+        <intent
+            android:action="com.alexzh.temperatureconverter.ACTION_FAHRENHEIT_TO_KELVIN"
+            android:targetPackage="com.alexzh.temperatureconverter"
+            android:targetClass="com.alexzh.temperatureconverter.converter.TemperatureConverterActivity" />
+    </shortcut>
+</shortcuts>
+

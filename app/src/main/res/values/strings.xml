@@ -13,6 +13,22 @@
 
     <string name="convert_online_key" translatable="false">convert_online</string>
 
+    <string name="shortcut_short_C_to_F">C -> F</string>
+    <string name="shortcut_long_C_to_F">Convert Celsius to Fahrenheit</string>
+    <string name="shortcut_disabled_C_to_F">Converting from Celsius to Fahrenheit not available</string>
+
+    <string name="shortcut_short_C_to_K">C -> K</string>
+    <string name="shortcut_long_C_to_K">Convert Celsius to Kelvin</string>
+    <string name="shortcut_disabled_C_to_K">Converting from Celsius to Kelvin not available</string>
+
+    <string name="shortcut_short_F_to_C">F -> C</string>
+    <string name="shortcut_long_F_to_C">Convert Fahrenheit to Celsius</string>
+    <string name="shortcut_disabled_F_to_C">Converting from Fahrenheit to Celsius not available</string>
+
+    <string name="shortcut_short_F_to_K">F -> K</string>
+    <string name="shortcut_long_F_to_K">Convert Fahrenheit to Kelvin</string>
+    <string name="shortcut_disabled_F_to_K">Converting from Fahrenheit to Kelvin not available</string>
+
     <string-array name="temperature_units">
         <item>°C</item>
         <item>°F</item>
