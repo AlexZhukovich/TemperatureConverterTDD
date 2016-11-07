@@ -8,5 +8,6 @@ Example of using Test-Driven Development for Android project.
 The application has convert data locally or use simple web-service for it.
 
 Slides (TDD for Android): https://speakerdeck.com/alexzhukovich/tdd-for-android
+
 Slides (Testable Android apps): https://speakerdeck.com/alexzhukovich/testable-android-apps
 
