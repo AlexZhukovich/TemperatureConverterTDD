@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
+import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
@@ -38,6 +39,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.AllOf.allOf;
 
 @RunWith(AndroidJUnit4.class)
+@LargeTest
 public class TemperatureConverterActivityTest {
     private final static String CELSIUS_STR = "°C";
     private final static String FAHRENHEIT_STR = "°F";
@@ -56,16 +58,6 @@ public class TemperatureConverterActivityTest {
     public void setUp() {
         mVisibilityIdlingResource =
                 new ViewVisibilityIdlingResource(mRule.getActivity().findViewById(R.id.outputView), View.VISIBLE);
-
-        final TemperatureConverterActivity activity = mRule.getActivity();
-        Runnable wakeUpDevice = new Runnable() {
-            public void run() {
-                activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-                        | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
-                        | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-        };
-        activity.runOnUiThread(wakeUpDevice);
 
         registerIdlingResources(mVisibilityIdlingResource);
     }
