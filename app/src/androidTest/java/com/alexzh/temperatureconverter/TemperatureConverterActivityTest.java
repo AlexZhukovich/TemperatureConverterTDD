@@ -11,7 +11,6 @@ import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.alexzh.temperatureconverter.converter.TemperatureConverterActivity;
 
